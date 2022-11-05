@@ -28,12 +28,19 @@ export default function LeftMenu({ ...props }) {
         sx: {
           backgroundColor: "#181818",
           borderRight: "1px #F0F0F0 solid",
-          zIndex: "0"
+          zIndex: "0",
+          position: "absolute",
+          width: "100%"
         }
       }}
     >
-      <Toolbar sx={{ "margin-bottom": "1em" }} />
-      <Box sx={{ padding: "1em" }}>
+      <Box
+        sx={{
+          padding: "1em",
+          display: "flex", 
+          "justify-content": "center" 
+        }}
+      >
         <SearchBar setSearchQuery={setSearchQuery} />
       </Box>
       <Divider sx={{ "border-color": "#f0f0f0" }} />
