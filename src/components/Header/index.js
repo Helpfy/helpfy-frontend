@@ -9,7 +9,7 @@ import ButtonBG from '../ButtonBG';
 import HelpfyLogo from '../HelpfyLogo/'
 
 
-export default function BasePage({ ...props }) {
+export default function BasePage({ pageName="" }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -24,6 +24,14 @@ export default function BasePage({ ...props }) {
             }}
           >
             Helpfy
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              flexGrow: 10,
+            }}
+          >
+            {pageName}
           </Typography>
           <Box display="flex" justifyContent="flex-end" sx={{display: "flex", gap: "0.5em"}}>
             <ButtonBG
