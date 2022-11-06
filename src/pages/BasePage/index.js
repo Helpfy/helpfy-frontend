@@ -21,7 +21,7 @@ const createDrawerHeader = () => (
 // TODO: Colocar constantes como drawerWidth em arquivo de constantes
 
 const drawerWidth = 350;
-export default function BasePage() {
+export default function BasePage({ children }) {
 
   const [open, setOpen] = useState(false);
   const DrawerHeader = createDrawerHeader();
@@ -47,10 +47,7 @@ export default function BasePage() {
       />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>
-        </Typography>
-        <Typography paragraph>
-        </Typography>
+        {children}
       </Box>
     </Box>
   );
