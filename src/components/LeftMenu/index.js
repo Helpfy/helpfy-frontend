@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
