@@ -3,38 +3,22 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { styled } from '@mui/material/styles';
-import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
 import HelpfyLogo from '../HelpfyLogo';
 import ButtonBG from '../ButtonBG';
+import AppBar from '../AppBar';
 
-const createAppBar = (drawerWidth) => (
-  styled(MuiAppBar, { shouldForwardProp: (prop) => prop !== 'open' }) (
-    ({ theme, open }) => ({
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      }),
-    })
-  ));
-
-export default function Header({ open, handleDrawerOpen, pageName="", drawerWidth }) {
-  const AppBar = createAppBar(drawerWidth);
-  return (
+export default function Header({ 
+  open, 
+  handleDrawerOpen, 
+  drawerWidth ,
+  pageName=""
+}) {
+    return (
     <header>
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} drawerWidth={drawerWidth}>
         <Toolbar sx={{ height: "4em", background: "#393E41" }}>
           <IconButton
             color="inherit"
