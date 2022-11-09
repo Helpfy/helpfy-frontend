@@ -1,30 +1,15 @@
 import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 import Header from '../../components/Header';
 import LeftMenu from '../../components/LeftMenu';
+import DrawerHeader from '../../components/DrawerHeader';
 
-const createDrawerHeader = () => (
-  styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-  }))
-);
+import { drawerWidth } from '../../constants.js';
 
-// TODO: colocar funcoes de criacao 
-//  em arquivos de util (adicionar importacoes se necessário)
-// TODO: Colocar constantes como drawerWidth em arquivo de constantes
-
-const drawerWidth = 350;
 export default function BasePage({ children }) {
-
   const [open, setOpen] = useState(false);
-  const DrawerHeader = createDrawerHeader();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -44,6 +29,7 @@ export default function BasePage({ children }) {
       <LeftMenu 
         open={open} 
         handleDrawerClose={handleDrawerClose}
+        drawerWidth={drawerWidth}
       />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
