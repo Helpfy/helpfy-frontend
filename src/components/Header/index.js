@@ -1,57 +1,78 @@
 import React from 'react';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+
+import HelpfyLogo from '../HelpfyLogo';
 import ButtonBG from '../ButtonBG';
+import AppBar from '../AppBar';
 
-import HelpfyLogo from '../HelpfyLogo/'
-
-export default function Header({ pageName="" }) {
-  return (
+export default function Header({ 
+  open, 
+  handleDrawerOpen, 
+  drawerWidth ,
+  pageName=""
+}) {
+    return (
     <header>
-      <Box sx={{ flexGrow: 1, zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <AppBar position="fixed">
-          <Toolbar sx={{ height: "4em", background: "#393E41" }}>
+      <AppBar position="fixed" open={open} drawerWidth={drawerWidth}>
+        <Toolbar sx={{ height: "4em", background: "#393E41" }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            edge="start"
+            size="large"
+          >
             <HelpfyLogo />
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                flexGrow: 3, 
-                "margin-left": "0.5em", 
-                "font-weight": "bold"
-              }}
-            >
-              Helpfy
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                flexGrow: 10,
-              }}
-            >
-              {pageName}
-            </Typography>
-            <Box 
-              display="flex"
-              justifyContent="flex-end"
-              sx={{display: "flex", gap: "0.5em"}}
-            >
-              <ButtonBG
-                text="Registrar"
-                color="#F0F0F0"
-                background="#217CCB"
-              />
-              <ButtonBG
-                text="Entrar"
-                color="#181818"
-                background="#F0F0F0"
-              />
-            </Box>
-          </Toolbar>
-        </AppBar>
-      </Box>
+          </IconButton>
+          <Typography 
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 3 }}
+          >
+            Helpfy 
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              flexGrow: 10,
+            }}
+          >
+            {pageName}
+          </Typography>
+          <Box 
+            display="flex"
+            justifyContent="flex-end"
+            sx={{display: "flex", gap: "0.5em"}}
+          >
+            <ButtonBG
+              text="Registrar"
+              color="#F0F0F0"
+              background="#217CCB"
+            />
+            <ButtonBG
+              text="Entrar"
+              color="#181818"
+              background="#F0F0F0"
+            />
+          </Box>
+        </Toolbar>
+      </AppBar>
     </header>
   );
 }
