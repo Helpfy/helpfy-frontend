@@ -49,9 +49,7 @@ export default function Header({
           </Typography>
           <Typography
             variant="h6"
-            sx={{
-              flexGrow: 10,
-            }}
+            sx={{ flexGrow: 3 }}
           >
             {pageName}
           </Typography>
