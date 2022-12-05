@@ -8,7 +8,9 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-export default function AnswersListPage() {
+import FilterButton from './FilterButton';
+
+export default function FiltersBar() {
   return (
     <Box sx={{ width: "100%" }}>
       <Stack 
@@ -17,29 +19,29 @@ export default function AnswersListPage() {
         justifyContent="flex-start"
         alignItems="flex-start"
       >
-        <Chip 
+        <FilterButton
           label="Novas"
           icon={<AccessTimeIcon color="#F0F0F0" fontSize="small" />}
-          sx={{ color: "#F0F0F0", background: "#1976D2", "font-size": "18px" }}
-          clickable
+          background="#1976D2"
+          fontColor="#F0F0F0"
         />
-        <Chip 
+        <FilterButton
           label="Mais Votadas"
           icon={<StarOutlineIcon color="#181818" fontSize="small" />}
-          sx={{ color: "#181818", background: "#F0F0F0", "font-size": "18px" }}
-          clickable
+          background="#F0F0F0"
+          fontColor="#181818"
         />
-        <Chip 
+        <FilterButton
           label="Relevantes"
           icon={<WhatshotIcon color="#181818" fontSize="small" />}
-          sx={{ color: "#181818", background: "#F0F0F0", "font-size": "18px" }}
-          clickable
+          background="#F0F0F0"
+          fontColor="#181818"
         />
-        <Chip 
+        <FilterButton
           label="Concluídas"
           icon={<CheckCircleOutlineIcon color="#181818" fontSize="small" />}
-          sx={{ color: "#181818", background: "#F0F0F0", "font-size": "18px" }}
-          clickable
+          background="#F0F0F0"
+          fontColor="#181818"
         />
       </Stack>
     </Box>
