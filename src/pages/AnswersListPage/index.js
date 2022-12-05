@@ -5,6 +5,7 @@ import BasePage from '../BasePage';
 import Box from '@mui/material/Box';
 
 import AnswerItem from '../../components/AnswerItem';
+import FiltersBar from '../../components/FiltersBar';
 
 import img from './img.jpeg';
 
@@ -35,6 +36,7 @@ export default function AnswersListPage() {
           width: "75%"
         }}
       >
+        <FiltersBar />
         {[answer, answer, answer].map(item => <AnswerItem answer={item} />)}
       </Box>
     </BasePage>
