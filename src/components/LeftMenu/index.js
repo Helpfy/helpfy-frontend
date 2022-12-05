@@ -59,7 +59,7 @@ export default function LeftMenu({
           justifyContent: "center" 
         }}
       >
-        <SearchBar setSearchQuery={setSearchQuery} />
+        <SearchBar setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
       </Box>
       <Divider sx={{ borderColor: "#f0f0f0" }} />
       <List>
