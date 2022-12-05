@@ -19,7 +19,7 @@ export default function Header({
     return (
     <header>
       <AppBar position="fixed" open={open} drawerWidth={drawerWidth}>
-        <Toolbar sx={{ height: "4em", background: "#393E41" }}>
+        <Toolbar sx={{ height: "64px", background: "#393E41" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"

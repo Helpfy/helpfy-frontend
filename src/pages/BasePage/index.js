@@ -31,7 +31,7 @@ export default function BasePage({ children, pageName }) {
         handleDrawerClose={handleDrawerClose}
         drawerWidth={drawerWidth}
       />
-      <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto", "margin-top": "80px", background: "grey" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto", "margin-top": "64px", background: "grey" }}>
         {children}
       </Box>
     </Box>

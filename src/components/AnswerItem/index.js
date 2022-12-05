@@ -13,7 +13,6 @@ export default function AnswerItem({ answer }) {
     <Box
       sx={{
         background: "#393E41",
-        width: "90%",
         border: "1px solid #F0F0F0",
         padding: "1.5em",
         "border-radius": "10px",
