@@ -52,12 +52,12 @@ export default function AnswerItem({ answer }) {
       <Box>
         <Chip
           label={answer.status.likes}
-          icon={<ArrowUpwardIcon color="white" />}
+          icon={<ArrowUpwardIcon color="white" fontSize="small" />}
           sx={{ color: "#F0F0F0", background: "#393E41", "font-size": "18px" }}
         />
         <Chip
           label={answer.status.comments}
-          icon={<ModeCommentIcon color="white" />}
+          icon={<ModeCommentIcon color="white" fontSize="small" />}
           sx={{ color: "#F0F0F0", background: "#393E41", "font-size": "18px" }}
         />
       </Box>
