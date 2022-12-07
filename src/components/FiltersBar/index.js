@@ -2,7 +2,6 @@ import React from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Chip from '@mui/material/Chip';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
