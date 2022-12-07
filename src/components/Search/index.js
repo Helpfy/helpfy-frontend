@@ -19,9 +19,6 @@ export default function Search({ setSearchQuery }) {
           <SearchIcon />
         </ListItemIcon>
         <TextField
-          onInput={(e) => {
-            setSearchQuery(e.target.value);
-          }}
           placeholder="Buscar pergunta"
           size="small"
           sx={{ background: "#F0F0F0", borderRadius: "5px" }}
