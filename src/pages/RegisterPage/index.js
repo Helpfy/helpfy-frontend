@@ -8,24 +8,13 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  InputLabel,
   Link,
   OutlinedInput,
   Typography,
 } from "@mui/material";
-import Header from "../../components/Header";
-import { drawerWidth } from "../../constants.js";
+import BasePage from "../BasePage";
 
 export default function RegisterPage() {
-  const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -59,140 +48,168 @@ export default function RegisterPage() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Header
-        handleDrawerOpen={handleDrawerOpen}
-        open={open}
-        drawerWidth={drawerWidth}
-      />
+    <BasePage pageName="Registrar" withoutLeftMenu={true}>
       <Box
+        alignItems="center"
+        justifyContent="center"
+        margin={"auto"}
         sx={{
-          marginTop: 8,
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          "flex-direction": "column",
+          gap: "1em",
+          "align-items": "center",
+          width: "75%",
+          filter: "brightness(1)",
         }}
       >
-        <Typography component="h1" variant="h5">
-          Entre na comunidade Helpfy
-        </Typography>
-        <Typography component="p" paragraph={true}>
-          Obtenha mais recursos e privilégios ingressando na comunidade de
-          estudantes!
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <FormControl fullWidth={true}>
-                <InputLabel required htmlFor="username">
-                  Usuário
-                </InputLabel>
-                <OutlinedInput
-                  autoFocus
-                  required
-                  id="username"
-                  type={"text"}
-                  value={values.username}
-                  onChange={handleChange("username")}
-                  label="Usuário"
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl fullWidth={true}>
-                <InputLabel required htmlFor="email">
-                  Email
-                </InputLabel>
-                <OutlinedInput
-                  required
-                  id="email"
-                  type={"email"}
-                  value={values.email}
-                  onChange={handleChange("email")}
-                  label="Email"
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl fullWidth={true}>
-                <InputLabel required htmlFor="password">
-                  Senha
-                </InputLabel>
-                <OutlinedInput
-                  required
-                  id="password"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  onChange={handleChange("password")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Senha"
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl fullWidth={true}>
-                <InputLabel required htmlFor="confirmPassword">
-                  Repita a Senha
-                </InputLabel>
-                <OutlinedInput
-                  required
-                  id="confirmPassword"
-                  type={values.showConfirmPassword ? "text" : "password"}
-                  value={values.confirmPassword}
-                  onChange={handleChange("confirmPassword")}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle confirm Password visibility"
-                        onClick={(e) => handleClickShowPassword(e, true)}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {values.showConfirmPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Repita a Senha"
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+        <Container component="main" maxWidth="xs">
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            Registrar
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link href="login" variant="body2">
-                Já é registrado? Acesse aqui!
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
+            <Typography
+              component="h1"
+              variant="h5"
+              color={"#f0f0f0"}
+              fontWeight={"bold"}
+            >
+              Entre na comunidade Helpfy
+            </Typography>
+            <Typography
+              component="p"
+              paragraph={true}
+              color={"#f0f0f0"}
+              textAlign="center"
+            >
+              Obtenha mais recursos e privilégios ingressando na comunidade de
+              estudantes!
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth={true}
+                    sx={{ background: "white", borderRadius: "5px" }}
+                  >
+                    <OutlinedInput
+                      autoFocus
+                      required
+                      id="username"
+                      type={"text"}
+                      value={values.username}
+                      onChange={handleChange("username")}
+                      placeholder="Usuário"
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth={true}
+                    sx={{ background: "white", borderRadius: "5px" }}
+                  >
+                    <OutlinedInput
+                      required
+                      id="email"
+                      type={"email"}
+                      value={values.email}
+                      onChange={handleChange("email")}
+                      placeholder="Email"
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth={true}
+                    sx={{ background: "white", borderRadius: "5px" }}
+                  >
+                    <OutlinedInput
+                      required
+                      id="password"
+                      type={values.showPassword ? "text" : "password"}
+                      value={values.password}
+                      onChange={handleChange("password")}
+                      placeholder="Senha"
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth={true}
+                    sx={{ background: "white", borderRadius: "5px" }}
+                  >
+                    <OutlinedInput
+                      required
+                      id="confirmPassword"
+                      type={values.showConfirmPassword ? "text" : "password"}
+                      value={values.confirmPassword}
+                      onChange={handleChange("confirmPassword")}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle confirm Password visibility"
+                            onClick={(e) => handleClickShowPassword(e, true)}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showConfirmPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      placeholder="Repita a Senha"
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  color: "#F0F0F0",
+                  "&:hover": {
+                    background: "#217CCB",
+                    filter: "brightness(85%)",
+                  },
+                }}
+              >
+                Registrar
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link href="login" variant="body2">
+                    Já é registrado? Acesse aqui!
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
       </Box>
-    </Container>
+    </BasePage>
   );
 }
