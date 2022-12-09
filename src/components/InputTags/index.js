@@ -18,8 +18,10 @@ export default function InputTags() {
   };
 
   const handleAdd = (newTag) => {
-    setTags([...tags, newTag]);
-    setNewtag("");
+    if (newTag !== "" && !tags.includes(newTag)) {
+      setTags([...tags, newTag]);
+      setNewtag("");
+    }
   };
 
   const handleChange = (event) => {
@@ -56,16 +58,24 @@ export default function InputTags() {
         </Stack>
       </Fade>
 
-      <FormControl>
-        <InputLabel htmlFor="tag-component">Tag</InputLabel>
-        <OutlinedInput
-          id="tag-component"
-          value={newTag}
-          onChange={handleChange}
-          label="Tag"
-        />
-      </FormControl>
-      <ButtonBG text="Add" onClick={() => handleAdd(newTag)} />
+      <Stack
+        sx={{
+          display: "flex",
+        }}
+        direction="row"
+        spacing={1}
+      >
+        <FormControl>
+          <InputLabel htmlFor="tag-component">Tag</InputLabel>
+          <OutlinedInput
+            id="tag-component"
+            value={newTag}
+            onChange={handleChange}
+            label="Tag"
+          />
+        </FormControl>
+        <ButtonBG text="Add" onClick={() => handleAdd(newTag)} />
+      </Stack>
     </Box>
   );
 }
