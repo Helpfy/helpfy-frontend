@@ -27,15 +27,25 @@ export default function InputTags() {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        "flex-direction": "column",
+        gap: "1em",
+        width: "20%",
+        "align-items": "center",
+      }}
+    >
       <Fade in={tags.length >= 1}>
         <Stack
           sx={{
             background: "#393E41",
-            width: "fit-content",
             gap: "5px",
             padding: "5px",
             "border-radius": "10px",
+            display: "flex",
+            "flex-wrap": "wrap",
+            width: "100%",
           }}
           direction="row"
           spacing={1}
