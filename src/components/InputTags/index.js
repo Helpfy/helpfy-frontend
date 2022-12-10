@@ -32,7 +32,7 @@ export default function InputTags() {
     <Box
       sx={{
         display: "flex",
-        "flex-direction": "column",
+        flexDirection: "column",
         gap: "1em",
       }}
     >
@@ -41,13 +41,13 @@ export default function InputTags() {
           sx={{
             padding: "5px",
             display: "flex",
-            "flex-wrap": "wrap",
+            flexWrap: "wrap",
           }}
           direction="row"
           spacing={1}
         >
-          {tags.map((tag) => (
-            <Tag name={tag} onDelete={handleDelete} />
+          {tags.map((tag, index) => (
+            <Tag key={index} name={tag} onDelete={handleDelete} />
           ))}
         </Stack>
       </Fade>
