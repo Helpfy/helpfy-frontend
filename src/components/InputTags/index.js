@@ -34,20 +34,16 @@ export default function InputTags() {
         display: "flex",
         "flex-direction": "column",
         gap: "1em",
-        width: "20%",
-        "align-items": "center",
       }}
     >
       <Fade in={tags.length >= 1}>
         <Stack
           sx={{
             background: "#393E41",
-            gap: "5px",
             padding: "5px",
             "border-radius": "10px",
             display: "flex",
             "flex-wrap": "wrap",
-            width: "100%",
           }}
           direction="row"
           spacing={1}
@@ -59,15 +55,16 @@ export default function InputTags() {
       </Fade>
 
       <Stack
-        sx={{
-          display: "flex",
-        }}
         direction="row"
+        sx={{
+          gap: "5px",
+        }}
         spacing={1}
       >
-        <FormControl>
+        <FormControl sx={{ width: "100%" }}>
           <InputLabel htmlFor="tag-component">Tag</InputLabel>
           <OutlinedInput
+            sx={{ background: "#393E41" }}
             id="tag-component"
             value={newTag}
             onChange={handleChange}
