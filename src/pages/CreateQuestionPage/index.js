@@ -17,7 +17,7 @@ export default function CreateQuestionPage() {
 
   return (
     <BasePage pageName="Create Question">
-      <Box sx={{ display: "flex", "justify-content": "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Stack sx={{ width: "80%" }} spacing={1}>
           <InputTags />
           <FormControl>

@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import Chip from '@mui/material/Chip';
+import Chip from "@mui/material/Chip";
 
 export default function FilterButton({ icon, label, background, fontColor }) {
   return (
-    <Chip 
+    <Chip
       label={label}
       icon={icon}
-      sx={{ 
+      sx={{
         color: fontColor,
         background: background,
-        "font-size": "18px",
-        "&:hover": { 
+        fontSize: "18px",
+        "&:hover": {
           background: background,
-          filter: "brightness(0.95)"
-        } 
+          filter: "brightness(0.95)",
+        },
       }}
       clickable
     />
