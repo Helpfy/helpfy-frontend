@@ -39,9 +39,7 @@ export default function InputTags() {
       <Fade in={tags.length >= 1}>
         <Stack
           sx={{
-            background: "#393E41",
             padding: "5px",
-            "border-radius": "10px",
             display: "flex",
             "flex-wrap": "wrap",
           }}
