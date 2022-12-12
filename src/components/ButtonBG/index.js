@@ -2,7 +2,7 @@ import React from "react";
 
 import Button from "@mui/material/Button";
 
-export default function ButtonBG({ text, color, background, href }) {
+export default function ButtonBG({ text, color, background, href, onClick }) {
   return (
     <Button
       variant="contained"
@@ -15,6 +15,7 @@ export default function ButtonBG({ text, color, background, href }) {
           filter: "brightness(85%)",
         },
       }}
+      onClick={onClick}
     >
       {text}
     </Button>
