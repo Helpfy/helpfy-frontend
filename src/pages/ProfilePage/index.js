@@ -39,7 +39,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <BasePage pageName="Perfil" withoutLeftMenu={true}>
+    <BasePage pageName="Perfil">
       <Box
         alignItems="center"
         justifyContent="center"
@@ -102,7 +102,6 @@ export default function ProfilePage() {
                     sx={{ background: "white", borderRadius: "5px" }}
                   >
                     <OutlinedInput
-                      autoFocus
                       required
                       id="username"
                       type={"text"}
