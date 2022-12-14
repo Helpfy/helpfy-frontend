@@ -45,6 +45,7 @@ export default function CreateAnswerInput() {
         background={"#1976D2"}
         fontColor={"#F0F0F0"}
         sx={{ width: "fit-content" }}
+        onClick={() => { }}
       />
     </Box>
   );
