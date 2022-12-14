@@ -18,7 +18,7 @@ export default function AsksListPage() {
     time: "5 minutes ago",
     title: "Como corrigir o KDE no FreeBSD?",
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    tags: [ "FreeBSD", "KDE" ],
+    tags: ["FreeBSD", "KDE"],
     status: {
       likes: 150,
       comments: 2
@@ -26,13 +26,12 @@ export default function AsksListPage() {
   }
 
   return (
-    <BasePage pageName="Asks">
+    <BasePage pageName="Questões">
       <Box
         sx={{
           display: 'flex',
           "flex-direction": "column",
           gap: "1em",
-          "align-items": "center",
           width: "75%"
         }}
       >
