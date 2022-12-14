@@ -8,13 +8,26 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Link,
   OutlinedInput,
   Typography,
 } from "@mui/material";
 import BasePage from "../BasePage";
+import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
+  const linkStyle = {
+    margin: 0,
+    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+    fontWeight: 400,
+    fontSize: "0.875rem",
+    lineHeight: "1.43",
+    letterSpacing: "0.01071em",
+    color: "#1976d2",
+    "-webkit-text-decoration": "underline",
+    textDecoration: "underline",
+    textDecorationColor: "rgba(25, 118, 210, 0.4)",
+  };
+
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -201,7 +214,17 @@ export default function RegisterPage() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="login" variant="body2">
+                  <Link
+                    to="/login"
+                    // style={{
+                    //   margin: "1rem",
+                    //   fontWeight: 400,
+                    //   textDecoration: "underline",
+                    //   color: "#1976d2",
+
+                    // }}
+                    style={linkStyle}
+                  >
                     Já é registrado? Acesse aqui!
                   </Link>
                 </Grid>

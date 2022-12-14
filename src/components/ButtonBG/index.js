@@ -1,23 +1,26 @@
 import React from "react";
 
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export default function ButtonBG({ text, color, background, href, onClick }) {
   return (
-    <Button
-      variant="contained"
-      href={href}
-      sx={{
-        background: background,
-        color: color,
-        "&:hover": {
+    <Link to={href}>
+      <Button
+        variant="contained"
+        href={href}
+        sx={{
           background: background,
-          filter: "brightness(85%)",
-        },
-      }}
-      onClick={onClick}
-    >
-      {text}
-    </Button>
+          color: color,
+          "&:hover": {
+            background: background,
+            filter: "brightness(85%)",
+          },
+        }}
+        onClick={onClick}
+      >
+        {text}
+      </Button>
+    </Link>
   );
 }

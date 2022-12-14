@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import HelpfyLogo from "../HelpfyLogo";
 import ButtonBG from "../ButtonBG";
 import AppBar from "../AppBar";
+import { Link } from "react-router-dom";
 
 export default function Header({
   open,
@@ -34,9 +35,11 @@ export default function Header({
               <MenuIcon />
             </IconButton>
           )}
-          <IconButton color="inherit" edge="start" size="large" href="/">
-            <HelpfyLogo />
-          </IconButton>
+          <Link to={"/"}>
+            <IconButton color="inherit" edge="start" size="large">
+              <HelpfyLogo />
+            </IconButton>
+          </Link>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 3 }}>
             Helpfy
           </Typography>
@@ -49,13 +52,13 @@ export default function Header({
             sx={{ display: "flex", gap: "0.5em" }}
           >
             <ButtonBG
-              href="register"
+              href="/register"
               text="Registrar"
               color="#F0F0F0"
               background="#217CCB"
             />
             <ButtonBG
-              href="login"
+              href="/login"
               text="Entrar"
               color="#181818"
               background="#F0F0F0"
