@@ -43,7 +43,7 @@ export default function BasePage({
           flexGrow: 1,
           p: 3,
           overflow: "auto",
-          "margin-top": "64px",
+          marginTop: "64px",
           background: "#181818",
         }}
       >

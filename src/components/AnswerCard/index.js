@@ -48,11 +48,11 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
           background: "#393E41",
           border: "1px solid #F0F0F0",
           padding: "1.5em",
-          "border-radius": "10px",
+          borderRadius: "10px",
           display: "flex",
-          "flex-direction": "column",
+          flexDirection: "column",
           gap: "1em",
-          "border-left": "7px solid #1976D2",
+          borderLeft: "7px solid #1976D2",
           "&.accepted": { "border-left": "7px solid #49BE25" },
           "&.normal": { "border-left": "7px solid #1976D2" }
         }}

@@ -13,13 +13,6 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
   const [upvote, setUpvote] = useState(false);
   const [downvote, setDownvote] = useState(false);
 
-  const comment = {
-    user: "Jorginho Heizenhower",
-    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)"
-  };
-
-  const comments = [comment, comment];
-
   const handleUpvote = () => {
     setDownvote(false);
     setUpvote(!upvote);
@@ -38,9 +31,9 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
           background: "#393E41",
           border: "1px solid #F0F0F0",
           padding: "1.5em",
-          "border-radius": "10px",
+          borderRadius: "10px",
           display: "flex",
-          "flex-direction": "column",
+          flexDirection: "column",
           gap: "1em",
         }}
         className={accepted ? "accepted" : "normal"}
@@ -52,7 +45,16 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
           resumed={resumed}
         />
         <Stack direction="row" spacing={1}>
-          {ask.tags.map((tag) => <Chip label={tag} sx={{ background: "#1976D2", color: "#F0F0F0" }} />)}
+          {ask.tags.map((tag, i) => (
+            <Chip 
+              label={tag}
+              key={`${tag}${i}`}
+              sx={{ 
+                background: "#1976D2", 
+                color: "#F0F0F0" 
+              }} 
+            />
+          ))}
         </Stack>
         <CardContent
           title="Como corrigir o KDE no FreeBSD?"

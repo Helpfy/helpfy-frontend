@@ -22,11 +22,11 @@ export default function CommentCard({ text, user }) {
 				background: "#393E41",
 				border: "1px solid #F0F0F0",
 				padding: "1.5em",
-				"border-radius": "10px",
+				borderRadius: "10px",
 				display: "flex",
-				"flex-direction": "column",
+				flexDirection: "column",
 				gap: "1em",
-				"border-left": "7px solid #F0F0F0"
+				borderLeft: "7px solid #F0F0F0"
 			}}
 		>
 			<Typography color="#F0F0F0" variant="body2">

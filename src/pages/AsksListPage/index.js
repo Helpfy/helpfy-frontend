@@ -30,13 +30,13 @@ export default function AsksListPage() {
       <Box
         sx={{
           display: 'flex',
-          "flex-direction": "column",
+          flexDirection: "column",
           gap: "1em",
           width: "75%"
         }}
       >
         <FiltersBar />
-        {[ask, ask, ask].map(item => <AskCard ask={item} />)}
+        {[ask, ask, ask].map((item, i) => <AskCard ask={item} key={`${item}${i}`} />)}
       </Box>
     </BasePage>
   );

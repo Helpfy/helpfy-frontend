@@ -8,8 +8,6 @@ import AskCard from '../../components/AskCard';
 import AnswerCard from '../../components/AnswerCard';
 import CreateAnswerInput from '../../components/CreateAnswerInput';
 
-import { Typography, Divider } from '@mui/material';
-
 export default function AskPage() {
   const ask = {
     user: {
@@ -37,8 +35,6 @@ export default function AskPage() {
     }
   };
 
-  const commentUser = "Jorginho Aizenhower"
-
   return (
     <BasePage pageName={ask.title}>
       <Box
@@ -46,17 +42,17 @@ export default function AskPage() {
           width: "75%",
           display: "flex",
           gap: "2em",
-          "flex-direction": "column",
-          "align-items": "center"
+          flexDirection: "column",
+          alignItems: "center"
         }}
       >
         <AskCard ask={ask} resumed={false} />
         <Box
           sx={{
             display: "flex",
-            "flex-direction": "column",
+            flexDirection: "column",
             gap: "1em",
-            "align-items": "center", width: "90%"
+            alignItems: "center", width: "90%"
           }}
         >
           <AnswerCard answer={answer} accepted />

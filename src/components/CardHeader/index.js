@@ -22,7 +22,7 @@ export default function CardHeader({
         sx={{
           display: "flex",
           gap: "1em",
-          "align-items": "center"
+          alignItems: "center"
         }}
       >
         <Avatar
@@ -30,18 +30,20 @@ export default function CardHeader({
           src={userpicture}
           sx={{ width: 50, height: 50 }}
         />
-        <Typography
-          variant="subtitle1"
-          sx={{
-            "font-weight": "bold",
-            color: "#F0F0F0" 
-          }}
-        >
-          {username}
+        <Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: "bold",
+              color: "#F0F0F0" 
+            }}
+          >
+            {username}
+          </Typography>
           <Typography variant="subtitle2" sx={{ color: "#898C8E" }}>
             {time}
           </Typography>
-        </Typography>
+        </Box>
       </Box>
       {!resumed && <CardOptions />}
     </Box>

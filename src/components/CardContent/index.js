@@ -12,23 +12,23 @@ export default function CardContent({
   return (
     <Box sx={{
       display: "flex",
-      "flex-direction": "column",
+      flexDirection: "column",
       gap: "1em"
     }}>
       <Typography
         variant="body1"
         sx={{
-          "font-weight": "bold",
+          fontWeight: "bold",
           color: "#F0F0F0"
         }}
       >
         {title}
       </Typography>
-      <Typography sx={{ "& *": { color: "#F0F0F0" } }}>
+      <Box sx={{ "& *": { color: "#F0F0F0" } }}>
         <ReactMarkdown
           children={tldr}
         />
-      </Typography>
+      </Box>
     </Box>
   );
 

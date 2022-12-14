@@ -10,7 +10,7 @@ export default function FilterButton({ icon, label, background, fontColor }) {
       sx={{ 
         color: fontColor,
         background: background,
-        "font-size": "18px",
+        fontSize: "18px",
         "&:hover": { 
           background: background,
           filter: "brightness(0.95)"
