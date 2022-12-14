@@ -8,7 +8,6 @@ export default function ButtonBG({ text, color, background, href, onClick }) {
     <Link to={href}>
       <Button
         variant="contained"
-        href={href}
         sx={{
           background: background,
           color: color,
