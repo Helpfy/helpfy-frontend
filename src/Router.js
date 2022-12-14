@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateQuestionPage from "./pages/CreateQuestionPage";
 import { AuthContext } from "./context/AuthContext";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function Router() {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,7 @@ export default function Router() {
         <Route exact path={RULES.route} element={<RulesPage />} />
         <Route exact path={REGISTER.route} element={<RegisterPage />} />
         <Route exact path={SIGN_IN.route} element={<LoginPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </>
     );
   };

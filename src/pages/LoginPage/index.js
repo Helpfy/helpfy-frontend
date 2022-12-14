@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
@@ -12,9 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 import BasePage from "../BasePage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 export default function LoginPage() {
+  const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const linkStyle = {
     margin: 0,
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
@@ -29,14 +34,40 @@ export default function LoginPage() {
   };
 
   const [values, setValues] = useState({
-    username: "",
+    email: "",
     password: "",
     showPassword: false,
   });
 
+  const goToHomePage = () => {
+    navigate("/");
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(values);
+    //TODO: separar logica para outro lugar, tipo criar store
+    const loginPayload = {
+      email: values.email,
+      password: values.password,
+    };
+    axios
+      .post("https://login-helpfy.free.beeceptor.com", loginPayload)
+      .then((response) => {
+        // const content = response.data;
+        const content = {
+          user: {
+            picture: "https://media.tenor.com/6ZhzHHYyNxoAAAAM/luffy.gif",
+            name: "Ruan",
+            lastName: "Gomes",
+          },
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+        };
+        loginUser(content);
+        goToHomePage();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleChange = (prop) => (event) => {
@@ -98,13 +129,12 @@ export default function LoginPage() {
                     sx={{ background: "white", borderRadius: "5px" }}
                   >
                     <OutlinedInput
-                      autoFocus
                       required
-                      id="username"
-                      type={"text"}
-                      value={values.username}
-                      onChange={handleChange("username")}
-                      placeholder="Usuário"
+                      id="email"
+                      type={"email"}
+                      value={values.email}
+                      onChange={handleChange("email")}
+                      placeholder="Email"
                     />
                   </FormControl>
                 </Grid>
