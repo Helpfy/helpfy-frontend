@@ -1,6 +1,6 @@
 export const drawerWidth = 350;
 
-export const HOME = { route: "/", title: "Questões" };
+export const HOME = { route: "/ask", title: "Questões" };
 export const PROFILE = { route: "/profile", title: "Perfil" };
 export const SIGN_IN = { route: "/login", title: "Entrar" };
 export const REGISTER = { route: "/register", title: "Registrar" };
