@@ -214,17 +214,7 @@ export default function RegisterPage() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link
-                    to="/login"
-                    // style={{
-                    //   margin: "1rem",
-                    //   fontWeight: 400,
-                    //   textDecoration: "underline",
-                    //   color: "#1976d2",
-
-                    // }}
-                    style={linkStyle}
-                  >
+                  <Link to="/login" style={linkStyle}>
                     Já é registrado? Acesse aqui!
                   </Link>
                 </Grid>
