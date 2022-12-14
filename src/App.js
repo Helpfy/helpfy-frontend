@@ -1,12 +1,10 @@
-import React from 'react';
-
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import Router from './Router.js';
+import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Router from "./Router.js";
 
 const theme = createTheme({
   white: {
-    main: "#F0F0F0"
+    main: "#F0F0F0",
   },
 });
 
