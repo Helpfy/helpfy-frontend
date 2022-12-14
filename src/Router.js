@@ -11,11 +11,12 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path={RULES.route} element={<RulesPage />} />
+        <Route index element={<AsksListPage />} />
+        <Route exact path={HOME.route} element={<AsksListPage />} />
         <Route exact path={REGISTER.route} element={<RegisterPage />} />
         <Route exact path={SIGN_IN.route} element={<LoginPage />} />
-        <Route exact path={HOME.route} element={<AsksListPage />}/>        
-        <Route exact path={ASK.route} element={<AskPage />}/>        
+        <Route exact path={ASK.route} element={<AskPage />} />
+        <Route exact path={RULES.route} element={<RulesPage />} />
       </Routes>
     </BrowserRouter>
   );
