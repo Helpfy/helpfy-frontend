@@ -6,16 +6,16 @@ export const ContextProvider = (props) => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState({});
 
-  const setStateAuth = (info) => {
-    setUser(info.user);
-    setToken(info.token);
-  };
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user")) || undefined;
     const token = JSON.parse(localStorage.getItem("token")) || undefined;
     setStateAuth({ user, token });
-  });
+  }, []);
+
+  const setStateAuth = (info) => {
+    setUser(info.user);
+    setToken(info.token);
+  };
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -36,6 +36,7 @@ export const ContextProvider = (props) => {
     logoutUser: logout,
     loginUser: login,
     setUser: setUser,
+    setStateAuth: setStateAuth,
   };
 
   return (

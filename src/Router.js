@@ -27,8 +27,12 @@ export default function Router() {
       <>
         <Route exact path={HOME.route} element={<AnswersListPage />} />
         <Route exact path={RULES.route} element={<RulesPage />} />
-        <Route exact path={REGISTER.route} element={<RegisterPage />} />
-        <Route exact path={SIGN_IN.route} element={<LoginPage />} />
+        {!user && (
+          <>
+            <Route exact path={REGISTER.route} element={<RegisterPage />} />
+            <Route exact path={SIGN_IN.route} element={<LoginPage />} />
+          </>
+        )}
         <Route path="/*" element={<NotFoundPage />} />
       </>
     );
