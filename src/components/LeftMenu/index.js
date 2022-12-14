@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import GavelIcon from '@mui/icons-material/Gavel';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import LabelIcon from '@mui/icons-material/Label';
@@ -25,9 +27,23 @@ export default function LeftMenu({
   const theme = useTheme();
 
   const commomItems = {
-    "Questões": <QuestionMarkIcon style={{ color: "#f0f0f0" }} />,
-    "Tags": <LabelIcon style={{ color: "#f0f0f0" }} />,
-    "Rankings": <MilitaryTechIcon style={{ color: "#f0f0f0" }} />
+    "Adicionar Questão": {
+      icon: <AddCircleIcon style={{ color: "#f0f0f0" }} />,
+      path: "/new-ask"
+    },
+    "Questões": {
+      icon: <QuestionMarkIcon style={{ color: "#f0f0f0" }} />,
+      path: "/ask"
+    },
+    "Perfil": {
+      icon: <AccountBoxIcon style={{ color: "#f0f0f0" }} />,
+      path: "/profile"
+    },
+    "Regras": {
+      icon: <GavelIcon style={{ color: "#f0f0f0" }} />,
+      path: "/rules"
+    },
+
   };
 
   return (
@@ -47,16 +63,16 @@ export default function LeftMenu({
     >
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose} sx={{ color: "#F0F0F0" }}>
-          {theme.direction === 'rtl' ? 
-            <ChevronRightIcon /> : 
+          {theme.direction === 'rtl' ?
+            <ChevronRightIcon /> :
             <ChevronLeftIcon />}
         </IconButton>
       </DrawerHeader>
       <Box
         sx={{
           padding: "1em",
-          display: "flex", 
-          justifyContent: "center" 
+          display: "flex",
+          justifyContent: "center"
         }}
       >
         <SearchBar setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
@@ -64,10 +80,11 @@ export default function LeftMenu({
       <Divider sx={{ borderColor: "#f0f0f0" }} />
       <List>
         {Object.keys(commomItems).map(item => (
-          <ListItemWithIcon 
+          <ListItemWithIcon
             key={item}
             text={item}
-            icon={commomItems[item]}
+            icon={commomItems[item].icon}
+            path={commomItems[item].path}
           />
         ))}
       </List>
