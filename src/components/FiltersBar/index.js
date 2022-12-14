@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-import FilterButton from './FilterButton';
+import FilterButton from "./FilterButton";
 
 export default function FiltersBar() {
   return (
     <Box sx={{ width: "100%" }}>
-      <Stack 
+      <Stack
         direction="row"
         spacing={1}
         justifyContent="flex-start"
