@@ -18,7 +18,7 @@ export default function NotFoundPage() {
           <Grid xs={6}>
             <Typography variant="h1">404</Typography>
             <Typography variant="h6">
-              The page you’re looking for doesn’t exist.
+              A página que você está procurando não existe.
             </Typography>
             <ButtonBG text={"Back Home"} href={"/"} />
           </Grid>
