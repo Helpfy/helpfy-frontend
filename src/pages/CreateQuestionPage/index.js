@@ -11,8 +11,8 @@ import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 
 export default function CreateQuestionPage() {
-  const [title, setTitle] = React.useState("");
-  const [questionText, setQuestionText] = React.useState("");
+  const [title, setTitle] = useState("");
+  const [questionText, setQuestionText] = useState("");
 
   const handleChange = (event) => {
     setTitle(event.target.value);
