@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { ASKS, REGISTER, RULES, SIGN_IN, ASK } from "./constants";
+import { ASKS, REGISTER, RULES, SIGN_IN, ASK, NEW_ASK } from "./constants";
 
 import RulesPage from "./pages/RulesPage";
 import AsksListPage from "./pages/AsksListPage";

@@ -46,18 +46,18 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
         />
         <Stack direction="row" spacing={1}>
           {ask.tags.map((tag, i) => (
-            <Chip 
+            <Chip
               label={tag}
               key={`${tag}${i}`}
-              sx={{ 
-                background: "#1976D2", 
-                color: "#F0F0F0" 
-              }} 
+              sx={{
+                background: "#1976D2",
+                color: "#F0F0F0"
+              }}
             />
           ))}
         </Stack>
         <CardContent
-          title="Como corrigir o KDE no FreeBSD?"
+          title={ask.title}
           tldr={ask.tldr}
         />
         <Box

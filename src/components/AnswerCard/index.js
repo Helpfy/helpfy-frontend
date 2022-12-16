@@ -99,7 +99,7 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
             />
           </Box>
           <Button
-            label={"Responder"}
+            label={"Comentar"}
             background={"#1976D2"}
             fontColor={"#F0F0F0"}
             onClick={handleAnswering}
