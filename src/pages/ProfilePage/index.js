@@ -39,7 +39,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <BasePage pageName="Perfil">
+    <BasePage pageName="Perfil" logout={true}>
       <Box
         alignItems="center"
         justifyContent="center"

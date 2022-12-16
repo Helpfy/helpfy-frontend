@@ -11,6 +11,7 @@ export default function BasePage({
   children,
   pageName,
   withoutLeftMenu = false,
+  logout,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -29,6 +30,7 @@ export default function BasePage({
         open={!withoutLeftMenu ? open : undefined}
         drawerWidth={!withoutLeftMenu ? drawerWidth : undefined}
         pageName={pageName}
+        logout={logout}
       />
       {!withoutLeftMenu && (
         <LeftMenu

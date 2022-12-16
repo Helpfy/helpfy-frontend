@@ -29,7 +29,8 @@ export default function RegisterPage() {
   };
 
   const [values, setValues] = useState({
-    username: "",
+    name: "",
+    lastName: "",
     password: "",
     confirmPassword: "",
     email: "",
@@ -110,11 +111,26 @@ export default function RegisterPage() {
                     <OutlinedInput
                       autoFocus
                       required
-                      id="username"
+                      id="name"
                       type={"text"}
-                      value={values.username}
-                      onChange={handleChange("username")}
-                      placeholder="Usuário"
+                      value={values.name}
+                      onChange={handleChange("name")}
+                      placeholder="Nome"
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth={true}
+                    sx={{ background: "white", borderRadius: "5px" }}
+                  >
+                    <OutlinedInput
+                      required
+                      id="lastName"
+                      type={"text"}
+                      value={values.lastName}
+                      onChange={handleChange("lastName")}
+                      placeholder="Sobrenome"
                     />
                   </FormControl>
                 </Grid>
