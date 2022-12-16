@@ -69,9 +69,9 @@ export default function RegisterPage() {
         margin={"auto"}
         sx={{
           display: "flex",
-          "flex-direction": "column",
+          flexDirection: "column",
           gap: "1em",
-          "align-items": "center",
+          alignItems: "center",
           width: "75%",
           filter: "brightness(1)",
         }}

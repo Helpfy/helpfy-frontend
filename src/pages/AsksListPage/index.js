@@ -4,13 +4,13 @@ import BasePage from '../BasePage';
 
 import Box from '@mui/material/Box';
 
-import AnswerItem from '../../components/AnswerItem';
+import AskCard from '../../components/AskCard';
 import FiltersBar from '../../components/FiltersBar';
 
 import img from './img.jpeg';
 
-export default function AnswersListPage() {
-  const answer = {
+export default function AsksListPage() {
+  const ask = {
     user: {
       picture: img,
       name: "Ruan Gomes"
@@ -18,7 +18,7 @@ export default function AnswersListPage() {
     time: "5 minutes ago",
     title: "Como corrigir o KDE no FreeBSD?",
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    tags: [ "FreeBSD", "KDE" ],
+    tags: ["FreeBSD", "KDE"],
     status: {
       likes: 150,
       comments: 2
@@ -26,18 +26,17 @@ export default function AnswersListPage() {
   }
 
   return (
-    <BasePage pageName="Answers">
+    <BasePage pageName="Questões">
       <Box
         sx={{
           display: 'flex',
-          "flex-direction": "column",
+          flexDirection: "column",
           gap: "1em",
-          "align-items": "center",
           width: "75%"
         }}
       >
         <FiltersBar />
-        {[answer, answer, answer].map(item => <AnswerItem answer={item} />)}
+        {[ask, ask, ask].map((item, i) => <AskCard ask={item} key={`${item}${i}`} />)}
       </Box>
     </BasePage>
   );
