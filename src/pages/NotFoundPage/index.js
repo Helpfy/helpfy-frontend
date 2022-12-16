@@ -20,12 +20,12 @@ export default function NotFoundPage() {
             <Typography variant="h6">
               A página que você está procurando não existe.
             </Typography>
-            <ButtonBG text={"Back Home"} href={"/"} />
+            <ButtonBG text={"Voltar para Home"} href={"/"} />
           </Grid>
           <Grid xs={6}>
             <img
               src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
-              alt=""
+              alt="404"
               width={500}
               height={250}
             />
