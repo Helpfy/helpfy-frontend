@@ -20,9 +20,9 @@ export default function AsksListPage() {
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     tags: ["FreeBSD", "KDE"],
     status: {
-      likes: 150,
-      comments: 2,
-    },
+      numUpVotes: 150,
+      numDownVotes: 2
+    }
   };
 
   return (

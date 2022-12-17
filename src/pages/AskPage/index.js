@@ -18,8 +18,8 @@ export default function AskPage() {
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     tags: ["FreeBSD", "KDE"],
     status: {
-      likes: 150,
-      comments: 2
+      numUpVotes: 150,
+      numDownVotes: 2
     }
   };
 
@@ -30,8 +30,8 @@ export default function AskPage() {
     time: "1 minute ago",
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     status: {
-      likes: 1,
-      comments: 0
+      numUpVotes: 3,
+      numDownVotes: 5
     }
   };
 
