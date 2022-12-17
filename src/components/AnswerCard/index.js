@@ -1,24 +1,13 @@
 import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import Divider from '@mui/material/Divider';
 
-import Button from '../../components/Button';
 import CardHeader from '../../components/CardHeader';
 import CardContent from '../../components/CardContent';
+import CardInteract from '../../components/CardInteract';
 import CommentList from '../../components/CommentList';
 
-import IconButton from "@mui/material/IconButton";
-import SendIcon from '@mui/icons-material/Send';
-import TextField from '@mui/material/TextField';
-
 export default function AnswerCard({ answer, resumed = true, accepted = false }) {
-  const [upvote, setUpvote] = useState(false);
-  const [downvote, setDownvote] = useState(false);
-  const [answering, setAnswering] = useState(false);
-
   const comment = {
     user: "Jorginho Heizenhower",
     text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)"
@@ -26,18 +15,16 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
 
   const comments = [comment, comment];
 
-  const handleUpvote = () => {
-    setDownvote(false);
-    setUpvote(!upvote);
+  const handleUp = () => {
+    console.log("answer upVote request :)");
   };
 
-  const handleDownvote = () => {
-    setUpvote(false);
-    setDownvote(!downvote);
+  const handleDown = () => {
+    console.log("answer downVote request :(");
   };
 
-  const handleAnswering = () => {
-    setAnswering(!answering);
+  const handleComment = () => {
+    console.log("add answer comment request");
   }
 
   return (
@@ -48,8 +35,8 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
         flexDirection: "column",
         background: "#393E41",
         border: "1px solid #F0F0F0",
-        "&.accepted": { "border-left": "7px solid #49BE25" },
-        "&.normal": { "border-left": "1px solid #F0F0F0" },
+        "&.accepted": { borderLeft: "7px solid #49BE25" },
+        "&.normal": { borderLeft: "1px solid #F0F0F0" },
         borderRadius: "10px",
         padding: "1.5em",
         gap: "1em"
@@ -72,66 +59,13 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
           time={answer.time}
           resumed={resumed}
         />
-        <CardContent
-          tldr={answer.tldr}
+        <CardContent tldr={answer.tldr} />
+        <CardInteract
+          data={answer.status}
+          handleUp={handleUp}
+          handleDown={handleDown}
+          addComment={handleComment}
         />
-        <Divider sx={{ borderColor: "#F0F0F0" }} />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              gap: "1em",
-            }}
-          >
-            <Button
-              label={answer.status.likes}
-              icon={<ArrowUpwardIcon color="white" fontSize="small" />}
-              background={"#49BE25"}
-              fontColor={"#181818"}
-              onClick={handleUpvote}
-              isActive={upvote}
-            />
-            <Button
-              label={answer.status.comments}
-              icon={<ArrowDownwardIcon color="white" fontSize="small" />}
-              background={"#E80000"}
-              fontColor={"#181818"}
-              onClick={handleDownvote}
-              isActive={downvote}
-            />
-          </Box>
-          <Button
-            label={"Comentar"}
-            background={"#1976D2"}
-            fontColor={"#F0F0F0"}
-            onClick={handleAnswering}
-            isActive={answering}
-          />
-        </Box>
-        {answering && (
-          <TextField
-            sx={{
-              borderRadius: "5px",
-              color: "white",
-              background: "#F0F0F0"
-            }}
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <IconButton>
-                  <SendIcon sx={{ color: "#1976D2" }} fontSize="small" />
-                </IconButton>
-              )
-            }}
-            multiline
-          />
-        )}
       </Box>
       <CommentList comments={comments} />
     </Box>
