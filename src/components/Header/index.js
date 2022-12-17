@@ -73,26 +73,28 @@ export default function Header({
               justifyContent="flex-end"
               sx={{ display: "flex", gap: "1em" }}
             >
-              <Link to="/profile">
-                <Avatar
-                  sx={{
-                    bgcolor: "#f0f0f0",
-                    width: "3rem",
-                    height: "3rem",
-                  }}
-                  src={user.picture || imageDefault}
-                  alt={`Profile image of ...`}
-                >
+              {!logout && (
+                <Link to="/profile">
                   <Avatar
                     sx={{
                       bgcolor: "#f0f0f0",
                       width: "3rem",
                       height: "3rem",
                     }}
-                    src={imageNotFound}
-                  />
-                </Avatar>
-              </Link>
+                    src={user.avatarLink || imageDefault}
+                    alt={`Profile image of ...`}
+                  >
+                    <Avatar
+                      sx={{
+                        bgcolor: "#f0f0f0",
+                        width: "3rem",
+                        height: "3rem",
+                      }}
+                      src={imageNotFound}
+                    />
+                  </Avatar>
+                </Link>
+              )}
               {logout && (
                 <ButtonBG
                   text="Sair"
