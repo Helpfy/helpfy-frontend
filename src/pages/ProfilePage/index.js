@@ -46,9 +46,9 @@ export default function ProfilePage() {
         margin={"auto"}
         sx={{
           display: "flex",
-          "flex-direction": "column",
+          flexDirection: "column",
           gap: "1em",
-          "align-items": "center",
+          alignItems: "center",
           width: "75%",
           filter: "brightness(1)",
         }}
@@ -161,6 +161,6 @@ export default function ProfilePage() {
           </Box>
         </Container>
       </Box>
-    </BasePage>
+    </BasePage >
   );
 }
