@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Container, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import { Box, Typography } from "@mui/material";
 import ButtonBG from "../../components/ButtonBG";
 
 export default function NotFoundPage() {
@@ -13,7 +12,7 @@ export default function NotFoundPage() {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        background: "#181818"
+        background: "#181818",
       }}
     >
       <Typography
@@ -21,7 +20,9 @@ export default function NotFoundPage() {
         color="#F0F0F0"
         fontWeight="bold"
         background="blue"
-      >404</Typography>
+      >
+        404
+      </Typography>
       <Typography variant="h6" color="#F0F0F0">
         A página que você está procurando não existe.
       </Typography>
