@@ -13,7 +13,7 @@ export default function CommentList({ comments }) {
 				flexDirection: "column"
 			}}
 		>
-			{comments.map((comment) => <CommentCard user={comment.user} text={comment.text} />)}
+			{comments.map((comment, i) => <CommentCard user={comment.user} text={comment.text} key={i} />)}
 		</Box>
 	);
 }
