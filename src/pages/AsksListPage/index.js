@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import BasePage from '../BasePage';
+import BasePage from "../BasePage";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import AskCard from '../../components/AskCard';
-import FiltersBar from '../../components/FiltersBar';
+import AskCard from "../../components/AskCard";
+import FiltersBar from "../../components/FiltersBar";
 
-import img from './img.jpeg';
+import img from "./img.jpeg";
 
 export default function AsksListPage() {
   const ask = {
     user: {
       picture: img,
-      name: "Ruan Gomes"
+      name: "Ruan Gomes",
     },
     time: "5 minutes ago",
     title: "Como corrigir o KDE no FreeBSD?",
@@ -21,22 +21,24 @@ export default function AsksListPage() {
     tags: ["FreeBSD", "KDE"],
     status: {
       likes: 150,
-      comments: 2
-    }
-  }
+      comments: 2,
+    },
+  };
 
   return (
     <BasePage pageName="Questões">
       <Box
         sx={{
-          display: 'flex',
+          display: "flex",
           flexDirection: "column",
           gap: "1em",
-          width: "75%"
+          width: "75%",
         }}
       >
         <FiltersBar />
-        {[ask, ask, ask].map((item, i) => <AskCard ask={item} key={`${item}${i}`} />)}
+        {[ask, ask, ask].map((item, i) => (
+          <AskCard ask={item} key={`${item}${i}`} />
+        ))}
       </Box>
     </BasePage>
   );
