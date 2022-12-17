@@ -6,7 +6,7 @@ import BasePage from "../BasePage/";
 
 export default function RulesPage() {
   return (
-    <BasePage pageName="Rules">
+    <BasePage pageName="Regras da Comunidade">
       <Box
         sx={{
           background: "#393E41",

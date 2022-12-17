@@ -4,13 +4,13 @@ import BasePage from "../BasePage";
 
 import Box from "@mui/material/Box";
 
-import AnswerItem from "../../components/AnswerItem";
+import AskCard from "../../components/AskCard";
 import FiltersBar from "../../components/FiltersBar";
 
 import img from "./img.jpeg";
 
-export default function AnswersListPage() {
-  const answer = {
+export default function AsksListPage() {
+  const ask = {
     user: {
       picture: img,
       name: "Ruan Gomes",
@@ -26,19 +26,18 @@ export default function AnswersListPage() {
   };
 
   return (
-    <BasePage pageName="Answers">
+    <BasePage pageName="Questões">
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           gap: "1em",
-          alignItems: "center",
           width: "75%",
         }}
       >
         <FiltersBar />
-        {[answer, answer, answer].map((item) => (
-          <AnswerItem answer={item} />
+        {[ask, ask, ask].map((item, i) => (
+          <AskCard ask={item} key={`${item}${i}`} />
         ))}
       </Box>
     </BasePage>
