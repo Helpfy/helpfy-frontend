@@ -41,20 +41,28 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        background: "#393E41",
+        border: "1px solid #F0F0F0",
+        "&.accepted": { "border-left": "7px solid #49BE25" },
+        "&.normal": { "border-left": "1px solid #F0F0F0" },
+        borderRadius: "10px",
+        padding: "1.5em",
+        gap: "1em"
+      }}
+      className={accepted ? "accepted" : "normal"}
+    >
       <Box
         sx={{
           width: "100%",
-          background: "#393E41",
-          border: "1px solid #F0F0F0",
-          padding: "1.5em",
-          borderRadius: "10px",
           display: "flex",
           flexDirection: "column",
           gap: "1em",
-          borderLeft: "7px solid #1976D2",
-          "&.accepted": { "border-left": "7px solid #49BE25" },
-          "&.normal": { "border-left": "7px solid #1976D2" }
+          boxSizing: "border-box",
         }}
         className={accepted ? "accepted" : "normal"}
       >
@@ -111,9 +119,9 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
             sx={{
               borderRadius: "5px",
               color: "white",
-              background: "#F0F0F0",
-              fontSize: "16px"
+              background: "#F0F0F0"
             }}
+            size="small"
             InputProps={{
               endAdornment: (
                 <IconButton>
@@ -126,6 +134,6 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
         )}
       </Box>
       <CommentList comments={comments} />
-    </>
+    </Box>
   );
 }

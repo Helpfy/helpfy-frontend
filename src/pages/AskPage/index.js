@@ -43,7 +43,7 @@ export default function AskPage() {
           display: "flex",
           gap: "2em",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <AskCard ask={ask} resumed={false} />
@@ -52,7 +52,8 @@ export default function AskPage() {
             display: "flex",
             flexDirection: "column",
             gap: "1em",
-            alignItems: "center", width: "90%"
+            alignItems: "center",
+            width: "100%"
           }}
         >
           <AnswerCard answer={answer} accepted />
