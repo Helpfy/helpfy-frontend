@@ -6,26 +6,26 @@ import BasePage from "../BasePage/";
 
 export default function RulesPage() {
   return (
-    <BasePage pageName="Rules">
+    <BasePage pageName="Regras da Comunidade">
       <Box
         sx={{
           background: "#393E41",
           border: "1px solid #F0F0F0",
           padding: "1.5em",
-          "border-radius": "10px",
+          borderRadius: "10px",
           display: "flex",
-          "flex-direction": "column",
+          flexDirection: "column",
           width: "75%",
         }}
       >
         <Typography
           variant="subtitle1"
-          sx={{ "font-weight": "bold", color: "#F0F0F0", "font-size": "1rem" }}
+          sx={{ fontWeight: "bold", color: "#F0F0F0", fontSize: "1rem" }}
         >
           1. Quanto mais conhecimento bom, melhor!
           <Typography
             variant="subtitle2"
-            sx={{ color: "#898C8E", "font-size": "1rem" }}
+            sx={{ color: "#898C8E", fontSize: "1rem" }}
           >
             O Helpfy é uma biblioteca de soluções prontas representadas por um
             problema (a pergunta) e as soluções (respostas), da forma mais limpa
@@ -41,12 +41,12 @@ export default function RulesPage() {
 
         <Typography
           variant="subtitle1"
-          sx={{ "font-weight": "bold", color: "#F0F0F0", "font-size": "1rem" }}
+          sx={{ fontWeight: "bold", color: "#F0F0F0", fontSize: "1rem" }}
         >
           2. Juntos para o bem da comunidade
           <Typography
             variant="subtitle2"
-            sx={{ color: "#898C8E", "font-size": "1rem" }}
+            sx={{ color: "#898C8E", fontSize: "1rem" }}
           >
             O Helpfy é um esforço coletivo para criar mais conteúdo de qualidade
             sobre as diversas áreas dos cursos da UFCG (Universidade Federal de
@@ -62,12 +62,12 @@ export default function RulesPage() {
 
         <Typography
           variant="subtitle1"
-          sx={{ "font-weight": "bold", color: "#F0F0F0", "font-size": "1rem" }}
+          sx={{ fontWeight: "bold", color: "#F0F0F0", fontSize: "1rem" }}
         >
           3. Respeite os outros
           <Typography
             variant="subtitle2"
-            sx={{ color: "#898C8E", "font-size": "1rem" }}
+            sx={{ color: "#898C8E", fontSize: "1rem" }}
           >
             A forma como tratamos uns aos outros é a chave para o sucesso. Nosso
             objetivo primário é criar e dar suporte à própria comunidade. Tudo

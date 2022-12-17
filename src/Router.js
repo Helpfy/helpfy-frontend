@@ -1,8 +1,19 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HOME, PROFILE, REGISTER, RULES, SIGN_IN, NEW_ASK } from "./constants";
+
+import { 
+  ASKS,
+  REGISTER,
+  RULES,
+  SIGN_IN,
+  ASK,
+  NEW_ASK,
+  PROFILE
+} from "./constants";
+
 import RulesPage from "./pages/RulesPage";
-import AnswersListPage from "./pages/AnswersListPage";
+import AsksListPage from "./pages/AsksListPage";
+import AskPage from "./pages/AskPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -25,7 +36,9 @@ export default function Router() {
   const otherRoutes = () => {
     return (
       <>
-        <Route exact path={HOME.route} element={<AnswersListPage />} />
+        <Route index element={<AsksListPage />} />
+        <Route exact path={ASKS.route} element={<AsksListPage />} />
+        <Route exact path={ASK.route} element={<AskPage />} />
         <Route exact path={RULES.route} element={<RulesPage />} />
         {!user && (
           <>
