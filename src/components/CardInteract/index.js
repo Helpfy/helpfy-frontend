@@ -25,7 +25,7 @@ export default function CardInteractions({
 	const [downvote, setDownvote] = useState(numDownVotes);
 	const [typeButtonPressed, setTypeButtonPressed] = useState();
 
-	const [answering, setAnswering] = useState(false);
+	const [commenting, setCommenting] = useState(false);
 
 	const verifyTypeButtons = (clickedType) => {
 		if (!typeButtonPressed) {
@@ -62,8 +62,8 @@ export default function CardInteractions({
 		setDownvote(downvote + votes.target);
 	};
 
-	const handleAnswering = () => {
-		setAnswering(!answering);
+	const handleCommenting = () => {
+		setCommenting(!commenting);
 	}
 
 	const handleComment = () => {
@@ -119,11 +119,11 @@ export default function CardInteractions({
 					label={"Comentar"}
 					background={"#1976D2"}
 					fontColor={"#F0F0F0"}
-					onClick={handleAnswering}
-					isActive={answering}
+					onClick={handleCommenting}
+					isActive={commenting}
 				/>}
 			</Box>
-			{answering && (
+			{commenting && (
 				<TextField
 					sx={{
 						width: "100%",
