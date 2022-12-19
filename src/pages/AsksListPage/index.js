@@ -1,29 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import BasePage from "../BasePage";
 
-import Box from "@mui/material/Box";
+import {
+  SearchService
+} from '../../services/search';
+
+import { useSnackbar } from "notistack";
+
+import { Box, CircularProgress } from "@mui/material";
 
 import AskCard from "../../components/AskCard";
 import FiltersBar from "../../components/FiltersBar";
 
-import img from "./img.jpeg";
+export default function AsksListPage({ asksData = [] }) {
+  const { enqueueSnackbar } = useSnackbar();
+  const [isLoading, setIsLoading] = useState(true);
+  const [asks, setAsks] = useState(asksData);
 
-export default function AsksListPage() {
-  const ask = {
-    user: {
-      picture: img,
-      name: "Ruan Gomes",
-    },
-    time: "5 minutes ago",
-    title: "Como corrigir o KDE no FreeBSD?",
-    tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    tags: ["FreeBSD", "KDE"],
-    status: {
-      numUpVotes: 150,
-      numDownVotes: 2
+  useEffect(() => {
+    if (asksData.length > 0) {
+      setIsLoading(false);
+    } else {
+      SearchService.searchByFilter("new")
+        .then((response) => {
+          setAsks(response);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          let message = "Não foi possível se comunicar com o servidor.";
+          enqueueSnackbar(message, { variant: "error" });
+        });
     }
-  };
+  }, []);
 
   return (
     <BasePage pageName="Questões">
@@ -36,9 +46,13 @@ export default function AsksListPage() {
         }}
       >
         <FiltersBar />
-        {[ask, ask, ask].map((item, i) => (
-          <AskCard ask={item} key={`${item}${i}`} />
-        ))}
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          asks.map((item, i) => (
+            <AskCard ask={item} key={`${item}${i}`} />
+          ))
+        )}
       </Box>
     </BasePage>
   );
