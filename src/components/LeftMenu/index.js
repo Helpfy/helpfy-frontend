@@ -14,10 +14,15 @@ import Box from "@mui/material/Box";
 
 import ListItemWithIcon from "../ListItemWithIcon";
 import DrawerHeader from "../DrawerHeader";
-import SearchBar from "../Search/";
+import Search from "../Search/";
 import Drawer from "../Drawer";
 
-export default function LeftMenu({ open, handleDrawerClose, drawerWidth }) {
+export default function LeftMenu({
+  open,
+  handleDrawerClose,
+  handleDrawerOpen,
+  drawerWidth,
+}) {
   const [searchQuery, setSearchQuery] = useState("");
   const theme = useTheme();
 
@@ -71,7 +76,10 @@ export default function LeftMenu({ open, handleDrawerClose, drawerWidth }) {
           justifyContent: "center",
         }}
       >
-        <SearchBar setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
+        <Search
+          openMenu={handleDrawerOpen}
+          open={open}
+        />
       </Box>
       <Divider sx={{ borderColor: "#f0f0f0" }} />
       <List>
