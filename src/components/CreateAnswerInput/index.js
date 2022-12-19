@@ -15,7 +15,7 @@ export default function CreateAnswerInput() {
     <Box
       sx={{
         display: "flex",
-        "flex-direction": "column",
+        flexDirection: "column",
         width: "100%",
         alignItems: "center",
         gap: "1em"

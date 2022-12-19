@@ -10,12 +10,10 @@ export default function CommentList({ comments }) {
 			sx={{
 				width: "100%",
 				display: "flex",
-				flexDirection: "column",
-				gap: "1em",
-				alignItems: "center"
+				flexDirection: "column"
 			}}
 		>
-			{comments.map((comment) => <CommentCard user={comment.user} text={comment.text} />)}
+			{comments.map((comment, i) => <CommentCard user={comment.user} text={comment.text} key={i} />)}
 		</Box>
 	);
 }
