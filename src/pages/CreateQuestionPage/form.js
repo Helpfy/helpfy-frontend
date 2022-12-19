@@ -37,9 +37,17 @@ export default function CreateQuestionForm() {
   };
 
   const handleTagAdd = (newTag) => {
-    if (newTag !== "" && !tags.includes(newTag)) {
-      setTags([...tags, newTag]);
+    if (newTag === "") {
+      const msg = "A tag não pode ser vazia.";
+      enqueueSnackbar(msg, { variant: "error" });
+      return;
     }
+    if (tags.includes(newTag)) {
+      const msg = "Tag já existe.";
+      enqueueSnackbar(msg, { variant: "error" });
+      return;
+    }
+    setTags([...tags, newTag]);
   };
 
   const handleSubmit = (event) => {
@@ -52,14 +60,16 @@ export default function CreateQuestionForm() {
     setLoading(true);
     QuestionService.createQuestion(user, body, token)
       .then((response) => {
-        enqueueSnackbar("Questão criada com sucesso.", { variant: "success" });
+        const msg =
+          response.status === 201 ? "Questão criada com sucesso." : "";
+        enqueueSnackbar(msg, { variant: "success" });
         goToQuestionsPage();
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        enqueueSnackbar("Aconteceu um erro.", { variant: "error" });
-        console.log(err);
+        const msg = err.response.data.message;
+        enqueueSnackbar(msg, { variant: "error" });
       });
   };
 
