@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { 
+import {
   ASKS,
   REGISTER,
   RULES,
   SIGN_IN,
   ASK,
   NEW_ASK,
-  PROFILE
+  PROFILE,
 } from "./constants";
 
 import RulesPage from "./pages/RulesPage";

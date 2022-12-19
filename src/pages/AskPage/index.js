@@ -1,38 +1,32 @@
-import React from 'react';
+import React from "react";
 
-import BasePage from '../BasePage';
+import BasePage from "../BasePage";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import AskCard from '../../components/AskCard';
-import AnswerCard from '../../components/AnswerCard';
-import CreateAnswerInput from '../../components/CreateAnswerInput';
+import AskCard from "../../components/AskCard";
+import AnswerCard from "../../components/AnswerCard";
+import CreateAnswerInput from "../../components/CreateAnswerInput";
 
 export default function AskPage() {
   const ask = {
     user: {
-      name: "Ruan Gomes"
+      name: "Ruan Gomes",
     },
     time: "5 minutes ago",
     title: "Como corrigir o KDE no FreeBSD?",
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     tags: ["FreeBSD", "KDE"],
-    status: {
-      numUpVotes: 150,
-      numDownVotes: 2
-    }
   };
 
   const answer = {
     user: {
-      name: "Josiscleiton Gonzalez"
+      name: "Josiscleiton Gonzalez",
     },
     time: "1 minute ago",
     tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    status: {
-      numUpVotes: 3,
-      numDownVotes: 5
-    }
+    numberLikes: 3,
+    numberDislikes: 5,
   };
 
   return (
@@ -53,7 +47,7 @@ export default function AskPage() {
             flexDirection: "column",
             gap: "1em",
             alignItems: "center",
-            width: "100%"
+            width: "100%",
           }}
         >
           <AnswerCard answer={answer} accepted />

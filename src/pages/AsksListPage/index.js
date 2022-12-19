@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import BasePage from "../BasePage";
 
-import {
-  SearchService
-} from '../../services/search';
+import { SearchService } from "../../services/search";
 
 import { useSnackbar } from "notistack";
 
@@ -49,9 +47,7 @@ export default function AsksListPage({ asksData = [] }) {
         {isLoading ? (
           <CircularProgress />
         ) : (
-          asks.map((item, i) => (
-            <AskCard ask={item} key={`${item}${i}`} />
-          ))
+          asks.map((item, i) => <AskCard ask={item} key={`${item}${i}`} />)
         )}
       </Box>
     </BasePage>

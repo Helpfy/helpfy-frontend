@@ -1,28 +1,28 @@
-import React from 'react';
+import React from "react";
 
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import CardOptions from '../../components/CardOptions';
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import CardOptions from "../../components/CardOptions";
 
 export default function CardHeader({
   username,
   userpicture,
   time,
-  resumed=true
+  resumed = true,
 }) {
   return (
     <Box
       sx={{
         display: "flex",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
       }}
     >
       <Box
         sx={{
           display: "flex",
           gap: "1em",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <Avatar
@@ -35,7 +35,7 @@ export default function CardHeader({
             variant="subtitle1"
             sx={{
               fontWeight: "bold",
-              color: "#F0F0F0" 
+              color: "#F0F0F0",
             }}
           >
             {username}

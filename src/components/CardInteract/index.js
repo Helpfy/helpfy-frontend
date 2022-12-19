@@ -12,19 +12,17 @@ import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
 
 export default function CardInteractions({
-  data,
+  numUpVotes,
+  numDownVotes,
   handleUp,
   handleDown,
   addComment,
   resumed = false,
 }) {
-  const { numUpVotes, numDownVotes } = data;
-
   const [upvote, setUpvote] = useState(numUpVotes);
   const [downvote, setDownvote] = useState(numDownVotes);
   const [typeButtonPressed, setTypeButtonPressed] = useState();
   const [commenting, setCommenting] = useState(false);
-
 
   const verifyTypeButtons = (clickedType) => {
     if (!typeButtonPressed) {
@@ -63,14 +61,14 @@ export default function CardInteractions({
 
   const handleCommenting = () => {
     setCommenting(!commenting);
-  }
+  };
 
   const handleComment = () => {
     addComment();
-  }
+  };
 
   return (
-    <Box 
+    <Box
       sx={{
         width: "100%",
         display: "flex",
@@ -79,7 +77,7 @@ export default function CardInteractions({
         "&.border": {
           borderBottom: "1px solid #F0F0F0",
           paddingBottom: "1em",
-        }
+        },
       }}
       className={resumed ? "no-border" : "border"}
     >

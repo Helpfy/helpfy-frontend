@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import CardHeader from '../../components/CardHeader';
-import CardContent from '../../components/CardContent';
-import CommentList from '../../components/CommentList';
-import CardInteract from '../../components/CardInteract';
-import TagList from '../../components/TagList';
+import CardHeader from "../../components/CardHeader";
+import CardContent from "../../components/CardContent";
+import CommentList from "../../components/CommentList";
+import CardInteract from "../../components/CardInteract";
+import TagList from "../../components/TagList";
 
 export default function AskCard({ ask, resumed = true, accepted = false }) {
   const handleUp = () => {
@@ -23,7 +23,7 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
 
   const comment = {
     user: "Jorginho Heizenhower",
-    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)"
+    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)",
   };
 
   const comments = [comment, comment];
@@ -39,7 +39,7 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
         display: "flex",
         flexDirection: "column",
         gap: "1em",
-        boxSizing: "border-box"
+        boxSizing: "border-box",
       }}
       className={accepted ? "accepted" : "normal"}
     >
@@ -49,13 +49,11 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
         time={ask.time}
         resumed={resumed}
       />
-      <CardContent
-        title={ask.title}
-        tldr={ask.tldr}
-      />
+      <CardContent title={ask.title} tldr={ask.tldr} />
       <TagList tags={ask.tags} />
       <CardInteract
-        data={ask.status}
+        numUpVotes={ask.numberLikes}
+        numDownVotes={ask.numberDislikes}
         handleUp={handleUp}
         handleDown={handleDown}
         addComment={handleComment}

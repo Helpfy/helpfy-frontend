@@ -19,8 +19,7 @@ export default function Search({ open, openMenu }) {
 
   const handleSearch = async () => {
     if (searchQuery.length > 0) {
-      const asks = await SearchService.searchByTitle("a");
-
+      const asks = await SearchService.searchByTitle(searchQuery);
       navigate("/ask", { state: { asks: asks } });
     }
   };
