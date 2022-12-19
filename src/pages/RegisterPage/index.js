@@ -1,12 +1,8 @@
 import { React } from "react";
-import {
-  Box,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import BasePage from "../BasePage";
 
-import FormRegister from '../../components/FormRegister';
+import FormRegister from "../../components/FormRegister";
 
 export default function RegisterPage() {
   return (

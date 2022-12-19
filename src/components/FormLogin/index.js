@@ -38,7 +38,6 @@ export default function LoginPage({ loading, setLoading }) {
     showPassword: false,
   });
 
-
   const goToHomePage = () => {
     navigate("/");
   };
@@ -118,11 +117,7 @@ export default function LoginPage({ loading, setLoading }) {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {values.showPassword ? (
-                      <VisibilityOff />
-                    ) : (
-                      <Visibility />
-                    )}
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
