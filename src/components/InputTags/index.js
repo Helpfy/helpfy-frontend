@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
@@ -7,26 +7,10 @@ import Fade from "@mui/material/Fade";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Tag from "../Tag";
-import ButtonBG from "../ButtonBG";
+import { Button } from "@mui/material";
 
-export default function InputTags() {
-  const [tags, setTags] = React.useState([]);
-  const [newTag, setNewtag] = React.useState("");
-
-  const handleDelete = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
-  };
-
-  const handleAdd = (newTag) => {
-    if (newTag !== "" && !tags.includes(newTag)) {
-      setTags([...tags, newTag]);
-      setNewtag("");
-    }
-  };
-
-  const handleChange = (event) => {
-    setNewtag(event.target.value);
-  };
+export default function InputTags({ values, handleAdd, handleDelete }) {
+  const [newTag, setNewtag] = useState("");
 
   return (
     <Box
@@ -36,7 +20,7 @@ export default function InputTags() {
         gap: "1em",
       }}
     >
-      <Fade in={tags.length >= 1}>
+      <Fade in={values.length >= 1}>
         <Stack
           sx={{
             padding: "5px",
@@ -46,7 +30,7 @@ export default function InputTags() {
           direction="row"
           spacing={1}
         >
-          {tags.map((tag, index) => (
+          {values.map((tag, index) => (
             <Tag key={index} name={tag} onDelete={handleDelete} />
           ))}
         </Stack>
@@ -65,11 +49,26 @@ export default function InputTags() {
             sx={{ background: "#393E41" }}
             id="tag-component"
             value={newTag}
-            onChange={handleChange}
+            onChange={(e) => setNewtag(e.target.value)}
             label="Tag"
           />
         </FormControl>
-        <ButtonBG text="Add" onClick={() => handleAdd(newTag)} />
+        <Button
+          variant="contained"
+          sx={{
+            color: "#F0F0F0",
+            "&:hover": {
+              background: "#217CCB",
+              filter: "brightness(85%)",
+            },
+          }}
+          onClick={() => {
+            handleAdd(newTag);
+            setNewtag("");
+          }}
+        >
+          Add
+        </Button>
       </Stack>
     </Box>
   );

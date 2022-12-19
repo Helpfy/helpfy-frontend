@@ -14,6 +14,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider
+        autoHideDuration={5000}
         maxSnack={1}
         anchorOrigin={{
           vertical: "top",
