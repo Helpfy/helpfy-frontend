@@ -1,7 +1,7 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
-import { Typography, Divider } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function CommentCard({ text, user }) {
   return (
