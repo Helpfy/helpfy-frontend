@@ -1,25 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
 
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import {
+  FormControl,
+  ListItem,
+  ListItemIcon,
+  OutlinedInput,
+} from "@mui/material";
 
-export default function Search({ setSearchQuery }) {
+import { SearchService } from "../../services/search";
+
+export default function Search({ open, openMenu }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = async () => {
+    if (searchQuery.length > 0) {
+      const asks = await SearchService.searchByTitle(searchQuery);
+      navigate("/ask", { state: { asks: asks } });
+    }
+  };
+
   return (
-    <ListItem key="search" disablePadding sx={{ "& *": { color: "#f0f0f0" } }}>
-      <ListItemButton sx={{ padding: "0" }}>
-        <ListItemIcon>
-          <SearchIcon />
-        </ListItemIcon>
-        <TextField
-          placeholder="Buscar pergunta"
-          size="small"
+    <ListItem
+      key="search"
+      disablePadding
+      sx={{
+        background: "#181818",
+        "& *": { color: "#f0f0f0" },
+        padding: ".1em 0",
+      }}
+    >
+      <ListItemIcon
+        onClick={open ? handleSearch : openMenu}
+        sx={{ cursor: "pointer" }}
+      >
+        <SearchIcon />
+      </ListItemIcon>
+      <FormControl>
+        <OutlinedInput
           sx={{ background: "#F0F0F0", borderRadius: "5px" }}
+          type={"text"}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          size="small"
         />
-      </ListItemButton>
+      </FormControl>
     </ListItem>
   );
 }

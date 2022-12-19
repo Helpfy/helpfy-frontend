@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import CardHeader from '../../components/CardHeader';
-import CardContent from '../../components/CardContent';
-import CardInteract from '../../components/CardInteract';
-import CommentList from '../../components/CommentList';
+import CardHeader from "../../components/CardHeader";
+import CardContent from "../../components/CardContent";
+import CardInteract from "../../components/CardInteract";
+import CommentList from "../../components/CommentList";
 
-export default function AnswerCard({ answer, resumed = true, accepted = false }) {
+export default function AnswerCard({
+  answer,
+  resumed = true,
+  accepted = false,
+}) {
   const comment = {
     user: "Jorginho Heizenhower",
-    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)"
+    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)",
   };
 
   const comments = [comment, comment];
@@ -25,7 +29,7 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
 
   const handleComment = () => {
     console.log("add answer comment request");
-  }
+  };
 
   return (
     <Box
@@ -39,7 +43,7 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
         "&.normal": { borderLeft: "1px solid #F0F0F0" },
         borderRadius: "10px",
         padding: "1.5em",
-        gap: "1em"
+        gap: "1em",
       }}
       className={accepted ? "accepted" : "normal"}
     >
@@ -61,7 +65,8 @@ export default function AnswerCard({ answer, resumed = true, accepted = false })
         />
         <CardContent tldr={answer.tldr} />
         <CardInteract
-          data={answer.status}
+          numUpVotes={answer.numberLikes}
+          numDownVotes={answer.numberDislikes}
           handleUp={handleUp}
           handleDown={handleDown}
           addComment={handleComment}

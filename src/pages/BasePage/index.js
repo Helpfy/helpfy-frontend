@@ -10,8 +10,8 @@ import { drawerWidth } from "../../constants.js";
 export default function BasePage({
   children,
   pageName,
-  withoutLeftMenu = false,
   logout,
+  withoutLeftMenu = false,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -36,6 +36,7 @@ export default function BasePage({
         <LeftMenu
           open={open}
           handleDrawerClose={handleDrawerClose}
+          handleDrawerOpen={handleDrawerOpen}
           drawerWidth={drawerWidth}
         />
       )}
