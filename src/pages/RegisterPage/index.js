@@ -4,12 +4,11 @@ import {
   Container,
   Typography,
 } from "@mui/material";
-
 import BasePage from "../BasePage";
-import FormRegister from "../../components/FormRegister";
+
+import FormRegister from '../../components/FormRegister';
 
 export default function RegisterPage() {
-  console.log("a")
   return (
     <BasePage pageName="Registrar" withoutLeftMenu={true}>
       <Box
@@ -50,8 +49,8 @@ export default function RegisterPage() {
               Obtenha mais recursos e privilégios ingressando na comunidade de
               estudantes!
             </Typography>
+            <FormRegister />
           </Box>
-          <FormRegister />
         </Container>
       </Box>
     </BasePage>
