@@ -231,6 +231,6 @@ export default function ProfilePage() {
       >
         {content}
       </Box>
-    </BasePage >
+    </BasePage>
   );
 }
