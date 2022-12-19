@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -8,18 +8,13 @@ import {
   FormControl,
   ListItem,
   ListItemIcon,
-  OutlinedInput
-} from '@mui/material';
+  OutlinedInput,
+} from "@mui/material";
 
-import {
-  SearchService
-} from '../../services/search';
+import { SearchService } from "../../services/search";
 
-export default function Search({
-  open,
-  openMenu
-}) {
-  const [searchQuery, setSearchQuery] = useState('');
+export default function Search({ open, openMenu }) {
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = async () => {
@@ -28,15 +23,22 @@ export default function Search({
 
       navigate("/ask", { state: { asks: asks } });
     }
-  }
+  };
 
   return (
     <ListItem
       key="search"
       disablePadding
-      sx={{ background: "#181818", "& *": { color: "#f0f0f0" }, padding: ".1em 0" }}
+      sx={{
+        background: "#181818",
+        "& *": { color: "#f0f0f0" },
+        padding: ".1em 0",
+      }}
     >
-      <ListItemIcon onClick={open ? handleSearch : openMenu} sx={{ cursor: "pointer" }}>
+      <ListItemIcon
+        onClick={open ? handleSearch : openMenu}
+        sx={{ cursor: "pointer" }}
+      >
         <SearchIcon />
       </ListItemIcon>
       <FormControl>

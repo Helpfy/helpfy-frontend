@@ -35,8 +35,6 @@ export const ContextProvider = (props) => {
     token: token,
     logoutUser: logout,
     loginUser: login,
-    setUser: setUser,
-    setStateAuth: setStateAuth,
   };
 
   return (
