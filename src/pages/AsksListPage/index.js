@@ -31,7 +31,7 @@ export default function AsksListPage({ asksData = [] }) {
           enqueueSnackbar(message, { variant: "error" });
         });
     }
-  }, []);
+  }, [asksData.length]);
 
   return (
     <BasePage pageName="Questões">
