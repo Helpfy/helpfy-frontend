@@ -7,7 +7,7 @@ export const SearchService = {
     return response.data;
   },
   async searchByFilter(filter) {
-    const response = await api.get(`/search?title=&filter=${filter}`);
+    const response = await api.get(`/search?filter=${filter}`);
 
     return response.data;
   },

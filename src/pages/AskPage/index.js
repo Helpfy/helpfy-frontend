@@ -61,8 +61,12 @@ export default function AskPage({ askData }) {
               alignItems: "center",
             }}
           >
-            {ask.answers.map((answer) => (
-              <AnswerCard answer={answer} accepted={answer.solution} />
+            {ask.answers.map((answer, idx) => (
+              <AnswerCard
+                answer={answer}
+                accepted={answer.solution}
+                key={idx}
+              />
             ))}
           </Box>
           <CreateAnswerInput questionId={ask.id} />

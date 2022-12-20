@@ -9,6 +9,7 @@ import CommentList from "../../components/CommentList";
 
 import { CommentService } from "../../services/comment";
 import { AuthContext } from "../../context/AuthContext";
+import { AnswerService } from "../../services/answer";
 
 import { useSnackbar } from "notistack";
 
@@ -20,12 +21,20 @@ export default function AnswerCard({
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleUp = () => {
-    console.log("answer upVote request :)");
+  const handleUp = async () => {
+    const response = await AnswerService.likeAnswer(user.id, answer.id, token);
+
+    return response;
   };
 
-  const handleDown = () => {
-    console.log("answer downVote request :(");
+  const handleDown = async () => {
+    const response = await AnswerService.dislikeAnswer(
+      user.id,
+      answer.id,
+      token
+    );
+
+    return response;
   };
 
   const handleComment = async (comment) => {
@@ -81,6 +90,8 @@ export default function AnswerCard({
         <CardInteract
           numUpVotes={answer.numberLikes}
           numDownVotes={answer.numberDislikes}
+          likesSet={answer.likes}
+          dislikesSet={answer.dislikes}
           handleUp={handleUp}
           handleDown={handleDown}
           addComment={handleComment}

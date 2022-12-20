@@ -15,4 +15,32 @@ export const AnswerService = {
 
     return response.data;
   },
+
+  async likeAnswer(userId, answersId, token) {
+    const response = await api.patch(
+      `/answers/${answersId}/users/${userId}/like`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  },
+
+  async dislikeAnswer(userId, answersId, token) {
+    const response = await api.patch(
+      `/answers/${answersId}/users/${userId}/dislike`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  },
 };

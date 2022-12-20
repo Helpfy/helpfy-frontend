@@ -13,7 +13,6 @@ import { AuthContext } from "../../context/AuthContext";
 import { useSnackbar } from "notistack";
 
 export default function AskCard({ ask, resumed = true, accepted = false }) {
-  console.log(ask);
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -75,6 +74,8 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
       <CardInteract
         numUpVotes={ask.numberLikes}
         numDownVotes={ask.numberDislikes}
+        likesSet={ask.likes}
+        dislikesSet={ask.dislikes}
         handleUp={handleUp}
         handleDown={handleDown}
         addComment={handleComment}

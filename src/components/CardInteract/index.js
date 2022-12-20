@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Button from "../Button";
 
@@ -15,6 +15,8 @@ import { AuthContext } from "../../context/AuthContext";
 export default function CardInteractions({
   numUpVotes,
   numDownVotes,
+  likesSet,
+  dislikesSet,
   handleUp,
   handleDown,
   addComment,
@@ -27,6 +29,10 @@ export default function CardInteractions({
   const [comment, setComment] = useState("");
   const { user } = useContext(AuthContext);
 
+  useEffect(() => {
+    setButtonPressed(likesSet, dislikesSet);
+  }, []);
+
   const setButtonPressed = (likes, dislikes) => {
     if (likes.includes(user.id)) {
       setTypeButtonPressed("up");
@@ -38,21 +44,21 @@ export default function CardInteractions({
   };
 
   const handleUpvote = async () => {
-    const { dislikes, likes } = await handleUp();
+    const { numberDislikes, dislikes, likes, numberLikes } = await handleUp();
+
+    setUpvote(numberLikes);
+    setDownvote(numberDislikes);
 
     setButtonPressed(likes, dislikes);
-
-    setDownvote(dislikes.length);
-    setUpvote(likes.length);
   };
 
   const handleDownvote = async () => {
-    const { dislikes, likes } = await handleDown();
+    const { numberDislikes, dislikes, likes, numberLikes } = await handleDown();
+
+    setUpvote(numberLikes);
+    setDownvote(numberDislikes);
 
     setButtonPressed(likes, dislikes);
-
-    setUpvote(likes);
-    setDownvote(dislikes);
   };
 
   const handleCommenting = () => {

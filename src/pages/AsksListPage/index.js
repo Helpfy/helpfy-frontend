@@ -8,19 +8,24 @@ import { useSnackbar } from "notistack";
 
 import { Box, CircularProgress } from "@mui/material";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import AskCard from "../../components/AskCard";
 import FiltersBar from "../../components/FiltersBar";
 
-export default function AsksListPage({ asksData = [] }) {
+export default function AsksListPage() {
+  const { state } = useLocation();
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setIsLoading] = useState(true);
-  const [asks, setAsks] = useState(asksData);
+  const [asks, setAsks] = useState([]);
 
   useEffect(() => {
-    if (asksData.length > 0) {
-      setIsLoading(false);
+    if (state) {
+      const { asks: asksData } = state;
+      if (asksData && asksData.length > 0) {
+        setAsks(asksData);
+        setIsLoading(false);
+      }
     } else {
       SearchService.searchByFilter("new")
         .then((response) => {
@@ -33,7 +38,7 @@ export default function AsksListPage({ asksData = [] }) {
           enqueueSnackbar(message, { variant: "error" });
         });
     }
-  }, []);
+  }, [state]);
 
   return (
     <BasePage pageName="Questões">
@@ -50,8 +55,8 @@ export default function AsksListPage({ asksData = [] }) {
           <CircularProgress />
         ) : (
           asks.map((item, i) => (
-            <Link to={`/ask/${item.id}`}>
-              <AskCard ask={item} key={`${item}${i}`} />
+            <Link to={`/ask/${item.id}`} key={i}>
+              <AskCard ask={item} />
             </Link>
           ))
         )}
