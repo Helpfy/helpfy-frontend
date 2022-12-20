@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
