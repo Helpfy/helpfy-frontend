@@ -16,9 +16,9 @@ export const QuestionService = {
     });
   },
 
-  likeQuestion(user, question, token) {
-    return api.patch(
-      `/questions/${question.id}/users/${user.id}/like`,
+  async likeQuestion(userId, questionId, token) {
+    const response = await api.patch(
+      `/questions/${questionId}/users/${userId}/like`,
       {},
       {
         headers: {
@@ -26,11 +26,13 @@ export const QuestionService = {
         },
       }
     );
+
+    return response.data;
   },
 
-  dislikeQuestion(user, question, token) {
-    return api.patch(
-      `/questions/${question.id}/users/${user.id}/dislike`,
+  async dislikeQuestion(userId, questionId, token) {
+    const response = await api.patch(
+      `/questions/${questionId}/users/${userId}/dislike`,
       {},
       {
         headers: {
@@ -38,6 +40,8 @@ export const QuestionService = {
         },
       }
     );
+
+    return response.data;
   },
 
   updateAnsweredStatus(question, token) {
@@ -50,5 +54,11 @@ export const QuestionService = {
         },
       }
     );
+  },
+
+  async searchQuestionById(id) {
+    const response = await api.get(`/questions/${id}`);
+
+    return response.data;
   },
 };

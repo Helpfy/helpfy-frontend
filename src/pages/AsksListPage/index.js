@@ -8,6 +8,8 @@ import { useSnackbar } from "notistack";
 
 import { Box, CircularProgress } from "@mui/material";
 
+import { Link } from "react-router-dom";
+
 import AskCard from "../../components/AskCard";
 import FiltersBar from "../../components/FiltersBar";
 
@@ -47,7 +49,11 @@ export default function AsksListPage({ asksData = [] }) {
         {isLoading ? (
           <CircularProgress />
         ) : (
-          asks.map((item, i) => <AskCard ask={item} key={`${item}${i}`} />)
+          asks.map((item, i) => (
+            <Link to={`/ask/${item.id}`}>
+              <AskCard ask={item} key={`${item}${i}`} />
+            </Link>
+          ))
         )}
       </Box>
     </BasePage>

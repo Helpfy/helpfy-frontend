@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import Button from "../Button";
 
@@ -10,6 +10,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function CardInteractions({
   numUpVotes,
@@ -23,40 +24,35 @@ export default function CardInteractions({
   const [downvote, setDownvote] = useState(numDownVotes);
   const [typeButtonPressed, setTypeButtonPressed] = useState();
   const [commenting, setCommenting] = useState(false);
+  const [comment, setComment] = useState("");
+  const { user } = useContext(AuthContext);
 
-  const verifyTypeButtons = (clickedType) => {
-    if (!typeButtonPressed) {
-      setTypeButtonPressed(clickedType);
-      return { target: 1, second: 0 };
-    }
-
-    if (typeButtonPressed === clickedType) {
-      setTypeButtonPressed(null);
-      return { target: -1, second: 0 };
-    }
-
-    if (typeButtonPressed !== clickedType) {
-      setTypeButtonPressed(clickedType);
-      return { target: 1, second: -1 };
+  const setButtonPressed = (likes, dislikes) => {
+    if (likes.includes(user.id)) {
+      setTypeButtonPressed("up");
+    } else if (dislikes.includes(user.id)) {
+      setTypeButtonPressed("down");
+    } else {
+      setTypeButtonPressed(undefined);
     }
   };
 
-  const handleUpvote = () => {
-    handleUp();
+  const handleUpvote = async () => {
+    const { dislikes, likes } = await handleUp();
 
-    const votes = verifyTypeButtons("up");
+    setButtonPressed(likes, dislikes);
 
-    setDownvote(downvote + votes.second);
-    setUpvote(upvote + votes.target);
+    setDownvote(dislikes.length);
+    setUpvote(likes.length);
   };
 
-  const handleDownvote = () => {
-    handleDown();
+  const handleDownvote = async () => {
+    const { dislikes, likes } = await handleDown();
 
-    const votes = verifyTypeButtons("down");
+    setButtonPressed(likes, dislikes);
 
-    setUpvote(upvote + votes.second);
-    setDownvote(downvote + votes.target);
+    setUpvote(likes);
+    setDownvote(dislikes);
   };
 
   const handleCommenting = () => {
@@ -64,7 +60,7 @@ export default function CardInteractions({
   };
 
   const handleComment = () => {
-    addComment();
+    addComment(comment);
   };
 
   return (
@@ -74,12 +70,7 @@ export default function CardInteractions({
         display: "flex",
         flexDirection: "column",
         gap: ".5em",
-        "&.border": {
-          borderBottom: "1px solid #F0F0F0",
-          paddingBottom: "1em",
-        },
       }}
-      className={resumed ? "no-border" : "border"}
     >
       <Box
         sx={{
@@ -125,6 +116,8 @@ export default function CardInteractions({
       </Box>
       {commenting && (
         <TextField
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           sx={{
             width: "100%",
             borderRadius: "5px",

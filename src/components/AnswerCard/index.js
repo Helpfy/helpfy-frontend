@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import Box from "@mui/material/Box";
+import { Box, Divider } from "@mui/material";
 
 import CardHeader from "../../components/CardHeader";
 import CardContent from "../../components/CardContent";
 import CardInteract from "../../components/CardInteract";
 import CommentList from "../../components/CommentList";
 
+import { CommentService } from "../../services/comment";
+import { AuthContext } from "../../context/AuthContext";
+
+import { useSnackbar } from "notistack";
+
 export default function AnswerCard({
   answer,
   resumed = true,
   accepted = false,
 }) {
-  const comment = {
-    user: "Jorginho Heizenhower",
-    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)",
-  };
-
-  const comments = [comment, comment];
+  const { user, token } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleUp = () => {
     console.log("answer upVote request :)");
@@ -27,13 +28,26 @@ export default function AnswerCard({
     console.log("answer downVote request :(");
   };
 
-  const handleComment = () => {
-    console.log("add answer comment request");
+  const handleComment = async (comment) => {
+    const response = CommentService.commentAnswer(
+      comment,
+      answer.id,
+      user.id,
+      token
+    );
+
+    if (response.statusCode >= 400) {
+      let message = "Não foi possível se comunicar com o servidor.";
+      enqueueSnackbar(message, { variant: "error" });
+    }
+
+    window.location.reload(false);
   };
 
   return (
     <Box
       sx={{
+        width: "100%",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -58,12 +72,12 @@ export default function AnswerCard({
         className={accepted ? "accepted" : "normal"}
       >
         <CardHeader
-          username={answer.user.name}
-          userpicture={answer.user.img}
-          time={answer.time}
+          username={answer.author.name}
+          userpicture={answer.author.avatarLink}
+          time={answer.createdAt}
           resumed={resumed}
         />
-        <CardContent tldr={answer.tldr} />
+        <CardContent tldr={answer.body} />
         <CardInteract
           numUpVotes={answer.numberLikes}
           numDownVotes={answer.numberDislikes}
@@ -72,7 +86,8 @@ export default function AnswerCard({
           addComment={handleComment}
         />
       </Box>
-      <CommentList comments={comments} />
+      {answer.comments.length > 0 && <Divider color="#f0f0f0" />}
+      <CommentList comments={answer.comments} />
     </Box>
   );
 }

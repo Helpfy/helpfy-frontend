@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import MDEditor from '@uiw/react-md-editor';
+import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 
-import Button from '../Button';
-import { Typography } from '@mui/material';
+import Button from "../Button";
+import { Typography } from "@mui/material";
 
-export default function CreateAnswerInput() {
-  const [questionText, setQuestionText] = useState('');
+import { AuthContext } from "../../context/AuthContext";
+import { AnswerService } from "../../services/answer";
+
+import { useSnackbar } from "notistack";
+
+export default function CreateAnswerInput({ questionId }) {
+  const [questionText, setQuestionText] = useState("");
+  const { user, token } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleSubmit = async () => {
+    const response = await AnswerService.sendAnswer(
+      questionText,
+      questionId,
+      user.id,
+      token
+    );
+
+    if (response.statusCode >= 400) {
+      let message = "Não foi possível se comunicar com o servidor.";
+      enqueueSnackbar(message, { variant: "error" });
+    }
+
+    window.location.reload(false);
+  };
 
   return (
     <Box
@@ -18,7 +41,7 @@ export default function CreateAnswerInput() {
         flexDirection: "column",
         width: "100%",
         alignItems: "center",
-        gap: "1em"
+        gap: "1em",
       }}
     >
       <Typography variant="body1" fontWeight="bold" color="#F0F0F0">
@@ -26,7 +49,7 @@ export default function CreateAnswerInput() {
       </Typography>
       <Box
         sx={{
-          width: "95%"
+          width: "95%",
         }}
       >
         <MDEditor
@@ -45,7 +68,7 @@ export default function CreateAnswerInput() {
         background={"#1976D2"}
         fontColor={"#F0F0F0"}
         sx={{ width: "fit-content" }}
-        onClick={() => { }}
+        onClick={handleSubmit}
       />
     </Box>
   );
