@@ -23,7 +23,6 @@ export default function LeftMenu({
   handleDrawerOpen,
   drawerWidth,
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
   const theme = useTheme();
 
   const commomItems = {
