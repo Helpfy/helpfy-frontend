@@ -78,8 +78,8 @@ export default function Header({
                   <Avatar
                     sx={{
                       bgcolor: "#f0f0f0",
-                      width: "3rem",
-                      height: "3rem",
+                      width: "2rem",
+                      height: "2rem",
                     }}
                     src={user.avatarLink || imageDefault}
                     alt={`Profile image of ...`}
