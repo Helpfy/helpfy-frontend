@@ -1,61 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import BasePage from "../BasePage";
-
-import Box from "@mui/material/Box";
 
 import AskCard from "../../components/AskCard";
 import AnswerCard from "../../components/AnswerCard";
 import CreateAnswerInput from "../../components/CreateAnswerInput";
 
-export default function AskPage() {
-  const ask = {
-    user: {
-      name: "Ruan Gomes",
-    },
-    time: "5 minutes ago",
-    title: "Como corrigir o KDE no FreeBSD?",
-    tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    tags: ["FreeBSD", "KDE"],
-  };
+import { Box, CircularProgress } from "@mui/material";
 
-  const answer = {
-    user: {
-      name: "Josiscleiton Gonzalez",
-    },
-    time: "1 minute ago",
-    tldr: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    numberLikes: 3,
-    numberDislikes: 5,
-  };
+import { useParams } from "react-router-dom";
+
+import { QuestionService } from "../../services/question";
+
+import { useSnackbar } from "notistack";
+
+export default function AskPage({ askData }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [ask, setAsk] = useState(askData);
+  const params = useParams();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const { id } = params;
+
+  useEffect(() => {
+    if (!askData) {
+      QuestionService.searchQuestionById(id)
+        .then((response) => {
+          setAsk(response);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          let message = "Não foi possível se comunicar com o servidor.";
+          enqueueSnackbar(message, { variant: "error" });
+        });
+    }
+  }, []);
 
   return (
-    <BasePage pageName={ask.title}>
-      <Box
-        sx={{
-          width: "75%",
-          display: "flex",
-          gap: "2em",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <AskCard ask={ask} resumed={false} />
+    <BasePage pageName={ask ? ask.title : ""}>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
         <Box
           sx={{
+            width: "75%",
             display: "flex",
+            gap: "2em",
             flexDirection: "column",
-            gap: "1em",
             alignItems: "center",
-            width: "100%",
           }}
         >
-          <AnswerCard answer={answer} accepted />
-          <AnswerCard answer={answer} />
-          <AnswerCard answer={answer} />
+          <AskCard ask={ask} resumed={false} />
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1em",
+              alignItems: "center",
+            }}
+          >
+            {ask.answers.map((answer, idx) => (
+              <AnswerCard
+                answer={answer}
+                accepted={answer.solution}
+                key={idx}
+              />
+            ))}
+          </Box>
+          <CreateAnswerInput questionId={ask.id} />
         </Box>
-        <CreateAnswerInput />
-      </Box>
+      )}
     </BasePage>
   );
 }

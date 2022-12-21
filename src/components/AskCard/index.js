@@ -1,32 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import Box from "@mui/material/Box";
+import { Box, Divider } from "@mui/material";
 
 import CardHeader from "../../components/CardHeader";
 import CardContent from "../../components/CardContent";
 import CommentList from "../../components/CommentList";
 import CardInteract from "../../components/CardInteract";
 import TagList from "../../components/TagList";
+import { CommentService } from "../../services/comment";
+import { QuestionService } from "../../services/question";
+import { AuthContext } from "../../context/AuthContext";
+import { useSnackbar } from "notistack";
 
 export default function AskCard({ ask, resumed = true, accepted = false }) {
-  const handleUp = () => {
-    console.log("ask upVote request :)");
+  const { user, token } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleUp = async () => {
+    const response = await QuestionService.likeQuestion(user.id, ask.id, token);
+
+    return response;
   };
 
-  const handleDown = () => {
-    console.log("ask downVote request :(");
+  const handleDown = async () => {
+    const response = await QuestionService.dislikeQuestion(
+      user.id,
+      ask.id,
+      token
+    );
+
+    return response;
   };
 
-  const handleComment = () => {
-    console.log("add ask comment request");
-  };
+  const handleComment = async (comment) => {
+    const response = CommentService.commentQuestion(
+      comment,
+      ask.id,
+      user.id,
+      token
+    );
 
-  const comment = {
-    user: "Jorginho Heizenhower",
-    text: "Você poderia ter apenas aconselhado reinstalar o KDE. :)",
-  };
+    if (response.statusCode >= 400) {
+      let message = "Não foi possível se comunicar com o servidor.";
+      enqueueSnackbar(message, { variant: "error" });
+    }
 
-  const comments = [comment, comment];
+    window.location.reload(false);
+  };
 
   return (
     <Box
@@ -44,22 +64,25 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
       className={accepted ? "accepted" : "normal"}
     >
       <CardHeader
-        username={ask.user.name}
-        userpicture={ask.user.img}
-        time={ask.time}
+        username={ask.author.name}
+        userpicture={ask.author.avatarLink}
+        time={ask.author.createdAt}
         resumed={resumed}
       />
-      <CardContent title={ask.title} tldr={ask.tldr} />
+      <CardContent title={ask.title} tldr={ask.body} />
       <TagList tags={ask.tags} />
       <CardInteract
         numUpVotes={ask.numberLikes}
         numDownVotes={ask.numberDislikes}
+        likesSet={ask.likes}
+        dislikesSet={ask.dislikes}
         handleUp={handleUp}
         handleDown={handleDown}
         addComment={handleComment}
         resumed={resumed}
       />
-      {!resumed && <CommentList comments={comments} />}
+      {!resumed && ask.comments.length > 0 && <Divider color="#f0f0f0" />}
+      {!resumed && <CommentList comments={ask.comments} />}
     </Box>
   );
 }

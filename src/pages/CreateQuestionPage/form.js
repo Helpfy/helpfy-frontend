@@ -28,8 +28,8 @@ export default function CreateQuestionForm() {
 
   const [loading, setLoading] = useState(false);
 
-  const goToQuestionsPage = () => {
-    navigate("/ask");
+  const goToQuestionsPage = (questionId) => {
+    navigate(`/ask/${questionId}`);
   };
 
   const handleTagDelete = (tagToRemove) => {
@@ -63,7 +63,7 @@ export default function CreateQuestionForm() {
         const msg =
           response.status === 201 ? "Questão criada com sucesso." : "";
         enqueueSnackbar(msg, { variant: "success" });
-        goToQuestionsPage();
+        goToQuestionsPage(response.data.id);
         setLoading(false);
       })
       .catch((err) => {

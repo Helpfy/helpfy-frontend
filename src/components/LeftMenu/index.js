@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -16,6 +16,7 @@ import ListItemWithIcon from "../ListItemWithIcon";
 import DrawerHeader from "../DrawerHeader";
 import Search from "../Search/";
 import Drawer from "../Drawer";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function LeftMenu({
   open,
@@ -24,11 +25,13 @@ export default function LeftMenu({
   drawerWidth,
 }) {
   const theme = useTheme();
+  const { token } = useContext(AuthContext);
 
   const commomItems = {
     "Adicionar Questão": {
       icon: <AddCircleIcon style={{ color: "#f0f0f0" }} />,
       path: "/new-ask",
+      requiredLogin: true,
     },
     Questões: {
       icon: <QuestionMarkIcon style={{ color: "#f0f0f0" }} />,
@@ -37,6 +40,7 @@ export default function LeftMenu({
     Perfil: {
       icon: <AccountBoxIcon style={{ color: "#f0f0f0" }} />,
       path: "/profile",
+      requiredLogin: true,
     },
     Regras: {
       icon: <GavelIcon style={{ color: "#f0f0f0" }} />,
@@ -75,21 +79,24 @@ export default function LeftMenu({
           justifyContent: "center",
         }}
       >
-        <Search
-          openMenu={handleDrawerOpen}
-          open={open}
-        />
+        <Search openMenu={handleDrawerOpen} open={open} />
       </Box>
       <Divider sx={{ borderColor: "#f0f0f0" }} />
       <List>
-        {Object.keys(commomItems).map((item) => (
-          <ListItemWithIcon
-            key={item}
-            text={item}
-            icon={commomItems[item].icon}
-            path={commomItems[item].path}
-          />
-        ))}
+        {Object.keys(commomItems).map((item) => {
+          const itemData = commomItems[item];
+          if ((itemData.requiredLogin && token) || !itemData.requiredLogin) {
+            return (
+              <ListItemWithIcon
+                key={item}
+                text={item}
+                icon={itemData.icon}
+                path={itemData.path}
+              />
+            );
+          }
+          return <></>;
+        })}
       </List>
     </Drawer>
   );
