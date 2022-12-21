@@ -31,6 +31,7 @@ export default function CardInteractions({
 
   useEffect(() => {
     setButtonPressed(likesSet, dislikesSet);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setButtonPressed = (likes, dislikes) => {
