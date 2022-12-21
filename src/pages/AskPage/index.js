@@ -35,6 +35,7 @@ export default function AskPage({ askData }) {
           enqueueSnackbar(message, { variant: "error" });
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
