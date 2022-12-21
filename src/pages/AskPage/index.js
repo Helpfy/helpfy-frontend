@@ -35,7 +35,8 @@ export default function AskPage({ askData }) {
           enqueueSnackbar(message, { variant: "error" });
         });
     }
-  }, [askData, enqueueSnackbar, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <BasePage pageName={ask ? `Questão: ${ask.title}` : "Tela de Questão"}>

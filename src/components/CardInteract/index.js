@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Button from "../Button";
 
@@ -30,7 +30,7 @@ export default function CardInteractions({
   const { user } = useContext(AuthContext);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const setButtonPressed = useCallback((likes, dislikes) => {
+  const setButtonPressed = (likes, dislikes) => {
     if (!user?.id) {
       return;
     }
@@ -41,11 +41,12 @@ export default function CardInteractions({
     } else {
       setTypeButtonPressed(undefined);
     }
-  });
+  };
 
   useEffect(() => {
     setButtonPressed(likesSet, dislikesSet);
-  }, [dislikesSet, likesSet, setButtonPressed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleUpvote = async () => {
     if (user && user.id) {
@@ -117,7 +118,7 @@ export default function CardInteractions({
         </Box>
         {!resumed && user && (
           <Button
-            label={"Comentar"}
+            label={"Escrever comentario"}
             background={"#1976D2"}
             fontColor={"#F0F0F0"}
             onClick={handleCommenting}

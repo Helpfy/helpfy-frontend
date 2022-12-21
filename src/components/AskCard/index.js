@@ -40,7 +40,7 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
 
   const handleComment = async (comment) => {
     if (user && user.id) {
-      const response = CommentService.commentQuestion(
+      const response = await CommentService.commentQuestion(
         comment,
         ask.id,
         user.id,

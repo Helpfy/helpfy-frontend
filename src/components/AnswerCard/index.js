@@ -45,7 +45,7 @@ export default function AnswerCard({
 
   const handleComment = async (comment) => {
     if (user && user.id) {
-      const response = CommentService.commentAnswer(
+      const response = await CommentService.commentAnswer(
         comment,
         answer.id,
         user.id,
