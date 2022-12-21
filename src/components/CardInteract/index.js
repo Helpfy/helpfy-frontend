@@ -118,7 +118,7 @@ export default function CardInteractions({
         </Box>
         {!resumed && user && (
           <Button
-            label={"Escrever comentario"}
+            label={"Escrever comentário"}
             background={"#1976D2"}
             fontColor={"#F0F0F0"}
             onClick={handleCommenting}
