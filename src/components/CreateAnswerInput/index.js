@@ -34,7 +34,7 @@ export default function CreateAnswerInput({ questionId }) {
     window.location.reload(false);
   };
 
-  return (
+  return user ? (
     <Box
       sx={{
         display: "flex",
@@ -71,5 +71,7 @@ export default function CreateAnswerInput({ questionId }) {
         onClick={handleSubmit}
       />
     </Box>
+  ) : (
+    <></>
   );
 }

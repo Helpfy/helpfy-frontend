@@ -22,35 +22,41 @@ export default function AnswerCard({
   const { enqueueSnackbar } = useSnackbar();
 
   const handleUp = async () => {
-    const response = await AnswerService.likeAnswer(user.id, answer.id, token);
-
-    return response;
+    if (user && user.id) {
+      const response = await AnswerService.likeAnswer(
+        user.id,
+        answer.id,
+        token
+      );
+      return response;
+    }
   };
 
   const handleDown = async () => {
-    const response = await AnswerService.dislikeAnswer(
-      user.id,
-      answer.id,
-      token
-    );
-
-    return response;
+    if (user && user.id) {
+      const response = await AnswerService.dislikeAnswer(
+        user.id,
+        answer.id,
+        token
+      );
+      return response;
+    }
   };
 
   const handleComment = async (comment) => {
-    const response = CommentService.commentAnswer(
-      comment,
-      answer.id,
-      user.id,
-      token
-    );
-
-    if (response.statusCode >= 400) {
-      let message = "Não foi possível se comunicar com o servidor.";
-      enqueueSnackbar(message, { variant: "error" });
+    if (user && user.id) {
+      const response = CommentService.commentAnswer(
+        comment,
+        answer.id,
+        user.id,
+        token
+      );
+      if (response.statusCode >= 400) {
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      }
+      window.location.reload(false);
     }
-
-    window.location.reload(false);
   };
 
   return (

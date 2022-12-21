@@ -59,7 +59,7 @@ export default function LoginPage({ loading, setLoading }) {
       .catch((err) => {
         setLoading(false);
         let message = "Usuário não existe, verifique o e-mail e a senha.";
-        if (err.response.status !== 404) {
+        if (err?.response?.status !== 404) {
           message = "Não foi possível fazer o login.";
         }
         enqueueSnackbar(message, { variant: "error" });

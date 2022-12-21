@@ -17,35 +17,41 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleUp = async () => {
-    const response = await QuestionService.likeQuestion(user.id, ask.id, token);
-
-    return response;
+    if (user && user.id) {
+      const response = await QuestionService.likeQuestion(
+        user.id,
+        ask.id,
+        token
+      );
+      return response;
+    }
   };
 
   const handleDown = async () => {
-    const response = await QuestionService.dislikeQuestion(
-      user.id,
-      ask.id,
-      token
-    );
-
-    return response;
+    if (user && user.id) {
+      const response = await QuestionService.dislikeQuestion(
+        user.id,
+        ask.id,
+        token
+      );
+      return response;
+    }
   };
 
   const handleComment = async (comment) => {
-    const response = CommentService.commentQuestion(
-      comment,
-      ask.id,
-      user.id,
-      token
-    );
-
-    if (response.statusCode >= 400) {
-      let message = "Não foi possível se comunicar com o servidor.";
-      enqueueSnackbar(message, { variant: "error" });
+    if (user && user.id) {
+      const response = CommentService.commentQuestion(
+        comment,
+        ask.id,
+        user.id,
+        token
+      );
+      if (response.statusCode >= 400) {
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      }
+      window.location.reload(false);
     }
-
-    window.location.reload(false);
   };
 
   return (

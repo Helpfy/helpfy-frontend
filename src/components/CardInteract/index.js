@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import Button from "../Button";
 
@@ -29,12 +29,11 @@ export default function CardInteractions({
   const [comment, setComment] = useState("");
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    setButtonPressed(likesSet, dislikesSet);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const setButtonPressed = (likes, dislikes) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const setButtonPressed = useCallback((likes, dislikes) => {
+    if (!user?.id) {
+      return;
+    }
     if (likes.includes(user.id)) {
       setTypeButtonPressed("up");
     } else if (dislikes.includes(user.id)) {
@@ -42,24 +41,29 @@ export default function CardInteractions({
     } else {
       setTypeButtonPressed(undefined);
     }
-  };
+  });
+
+  useEffect(() => {
+    setButtonPressed(likesSet, dislikesSet);
+  }, [dislikesSet, likesSet, setButtonPressed]);
 
   const handleUpvote = async () => {
-    const { numberDislikes, dislikes, likes, numberLikes } = await handleUp();
-
-    setUpvote(numberLikes);
-    setDownvote(numberDislikes);
-
-    setButtonPressed(likes, dislikes);
+    if (user && user.id) {
+      const { numberDislikes, dislikes, likes, numberLikes } = await handleUp();
+      setUpvote(numberLikes);
+      setDownvote(numberDislikes);
+      setButtonPressed(likes, dislikes);
+    }
   };
 
   const handleDownvote = async () => {
-    const { numberDislikes, dislikes, likes, numberLikes } = await handleDown();
-
-    setUpvote(numberLikes);
-    setDownvote(numberDislikes);
-
-    setButtonPressed(likes, dislikes);
+    if (user && user.id) {
+      const { numberDislikes, dislikes, likes, numberLikes } =
+        await handleDown();
+      setUpvote(numberLikes);
+      setDownvote(numberDislikes);
+      setButtonPressed(likes, dislikes);
+    }
   };
 
   const handleCommenting = () => {
@@ -111,7 +115,7 @@ export default function CardInteractions({
             isActive={typeButtonPressed === "down"}
           />
         </Box>
-        {!resumed && (
+        {!resumed && user && (
           <Button
             label={"Comentar"}
             background={"#1976D2"}

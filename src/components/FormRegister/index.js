@@ -52,7 +52,7 @@ export default function FormRegister() {
       .catch((err) => {
         setLoading(false);
         let message = "Email já cadastrado.";
-        if (err.response.status !== 400) {
+        if (err?.response?.status !== 400) {
           message = "Não foi possível fazer o cadastro.";
         }
         enqueueSnackbar(message, { variant: "error" });

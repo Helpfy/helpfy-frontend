@@ -35,11 +35,10 @@ export default function AskPage({ askData }) {
           enqueueSnackbar(message, { variant: "error" });
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [askData, enqueueSnackbar, id]);
 
   return (
-    <BasePage pageName={ask ? ask.title : ""}>
+    <BasePage pageName={ask ? `Questão: ${ask.title}` : "Tela de Questão"}>
       {isLoading ? (
         <CircularProgress />
       ) : (
