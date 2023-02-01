@@ -1,6 +1,6 @@
 const DadosEstaticosService = {
   getURLServidor() {
-    return "https://helpfy-backend-production.up.railway.app";
+    return "https://helpfy-backend.up.railway.app";
   },
 };
 
