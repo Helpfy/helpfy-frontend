@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Box, Divider } from "@mui/material";
 
@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { AnswerService } from "../../services/answer";
 
 import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 export default function AnswerCard({
   answer,
@@ -20,6 +21,8 @@ export default function AnswerCard({
 }) {
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleUp = async () => {
     if (user && user.id) {
@@ -59,6 +62,37 @@ export default function AnswerCard({
     }
   };
 
+  const goToHomePage = () => {
+    navigate("/");
+  };
+
+  const deleteAnswer = async () => {
+    if (user && user.id) {
+      const response = await AnswerService.delete(answer.id, token);
+      if (response.statusCode >= 400) {
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      }
+      window.location.reload(false);
+      goToHomePage();
+    }
+  };
+
+  const editAnswerSubmit = async (event, questionText) => {
+    event.preventDefault();
+    setIsEditing(false);
+    const body = {
+      body: questionText,
+    };
+    const response = await AnswerService.update(answer.id, body, token);
+    let message = "Resposta editada com sucesso.";
+    if (response.statusCode >= 400) {
+      message = "Não foi possível se comunicar com o servidor.";
+      enqueueSnackbar(message, { variant: "error" });
+    }
+    enqueueSnackbar(message, { variant: "success" });
+  };
+
   return (
     <Box
       sx={{
@@ -91,17 +125,31 @@ export default function AnswerCard({
           userpicture={answer.author.avatarLink}
           time={answer.createdAt}
           resumed={resumed}
+          author={answer.author}
+          deleteOption={deleteAnswer}
+          editOption={() => {
+            setIsEditing(true);
+          }}
         />
-        <CardContent tldr={answer.body} />
-        <CardInteract
-          numUpVotes={answer.numberLikes}
-          numDownVotes={answer.numberDislikes}
-          likesSet={answer.likes}
-          dislikesSet={answer.dislikes}
-          handleUp={handleUp}
-          handleDown={handleDown}
-          addComment={handleComment}
+        <CardContent
+          tldr={answer.body}
+          editContent={editAnswerSubmit}
+          isEditing={isEditing}
+          cancelEdit={() => {
+            setIsEditing(false);
+          }}
         />
+        {!isEditing && (
+          <CardInteract
+            numUpVotes={answer.numberLikes}
+            numDownVotes={answer.numberDislikes}
+            likesSet={answer.likes}
+            dislikesSet={answer.dislikes}
+            handleUp={handleUp}
+            handleDown={handleDown}
+            addComment={handleComment}
+          />
+        )}
       </Box>
       {answer.comments.length > 0 && <Divider color="#f0f0f0" />}
       <CommentList comments={answer.comments} />

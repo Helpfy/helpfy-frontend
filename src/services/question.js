@@ -61,4 +61,26 @@ export const QuestionService = {
 
     return response.data;
   },
+
+  async delete(questionId, token) {
+    const response = await api.delete(
+      `/questions/${questionId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  },
+
+  async update(questionId, body, token) {
+    const response = await api.patch(`/questions/${questionId}`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
 };

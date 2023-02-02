@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-const options = [
-  'Excluir',
-  'Editar'
-];
+import React, { useState } from "react";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ITEM_HEIGHT = 30;
 
-export default function CardOptions() {
+export default function CardOptions({ deleteOption, editOption }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const options = [
+    { title: "Excluir", onClick: deleteOption },
+    { title: "Editar", onClick: editOption },
+  ];
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,8 +26,8 @@ export default function CardOptions() {
       <IconButton
         aria-label="more"
         id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -37,7 +36,7 @@ export default function CardOptions() {
       <Menu
         id="long-menu"
         MenuListProps={{
-          'aria-labelledby': 'long-button',
+          "aria-labelledby": "long-button",
         }}
         anchorEl={anchorEl}
         open={open}
@@ -45,13 +44,19 @@ export default function CardOptions() {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
+            width: "20ch",
           },
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
+          <MenuItem
+            key={option.title}
+            onClick={() => {
+              option.onClick();
+              handleClose();
+            }}
+          >
+            {option.title}
           </MenuItem>
         ))}
       </Menu>

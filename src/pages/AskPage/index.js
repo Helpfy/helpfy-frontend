@@ -67,6 +67,7 @@ export default function AskPage({ askData }) {
                 answer={answer}
                 accepted={answer.solution}
                 key={idx}
+                resumed={false}
               />
             ))}
           </Box>
