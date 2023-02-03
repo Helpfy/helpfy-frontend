@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   FormControl,
-  InputLabel,
   OutlinedInput,
 } from "@mui/material";
 import ReactMarkdown from "react-markdown";
@@ -21,7 +20,10 @@ export default function CardContent({
 }) {
   const [title, setTitle] = useState(titleProps);
   const [questionText, setQuestionText] = useState(tldr);
-  debugger;
+  const [resetObj, setResetObj] = useState({
+    title: titleProps,
+    questionText: tldr,
+  });
   return (
     <Box
       sx={{
@@ -42,13 +44,11 @@ export default function CardContent({
         </Typography>
       ) : (
         <FormControl>
-          <InputLabel htmlFor="title-component">Título</InputLabel>
           <OutlinedInput
-            sx={{ background: "#393E41" }}
+            sx={{ background: "#F0F0F0" }}
             id="title-component"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            label="Título"
           />
         </FormControl>
       )}
@@ -78,8 +78,8 @@ export default function CardContent({
                 },
               }}
               onClick={() => {
-                setTitle(titleProps);
-                setQuestionText(tldr);
+                setTitle(resetObj.title);
+                setQuestionText(resetObj.questionText);
                 cancelEdit();
               }}
             >
@@ -97,7 +97,10 @@ export default function CardContent({
                   filter: "brightness(85%)",
                 },
               }}
-              onClick={(event) => editContent(event, questionText, title)}
+              onClick={(event) => {
+                setResetObj({ title: title, questionText: questionText });
+                editContent(event, questionText, title);
+              }}
             >
               Enviar
             </Button>
