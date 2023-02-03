@@ -45,15 +45,11 @@ export const AnswerService = {
   },
 
   async delete(answersId, token) {
-    const response = await api.delete(
-      `/answers/${answersId}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await api.delete(`/answers/${answersId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return response.data;
   },

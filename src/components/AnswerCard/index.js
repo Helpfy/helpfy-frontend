@@ -1,27 +1,22 @@
 import React, { useContext, useState } from "react";
-
 import { Box, Divider } from "@mui/material";
-
 import CardHeader from "../../components/CardHeader";
 import CardContent from "../../components/CardContent";
 import CardInteract from "../../components/CardInteract";
 import CommentList from "../../components/CommentList";
-
 import { CommentService } from "../../services/comment";
 import { AuthContext } from "../../context/AuthContext";
 import { AnswerService } from "../../services/answer";
-
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
 
 export default function AnswerCard({
   answer,
   resumed = true,
   accepted = false,
+  getAsk,
 }) {
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
   const handleUp = async () => {
@@ -58,12 +53,8 @@ export default function AnswerCard({
         let message = "Não foi possível se comunicar com o servidor.";
         enqueueSnackbar(message, { variant: "error" });
       }
-      window.location.reload(false);
+      getAsk();
     }
-  };
-
-  const goToHomePage = () => {
-    navigate("/");
   };
 
   const deleteAnswer = async () => {
@@ -73,8 +64,8 @@ export default function AnswerCard({
         let message = "Não foi possível se comunicar com o servidor.";
         enqueueSnackbar(message, { variant: "error" });
       }
-      window.location.reload(false);
-      goToHomePage();
+      enqueueSnackbar("Resposta deletada com sucesso.", { variant: "success" });
+      getAsk();
     }
   };
 

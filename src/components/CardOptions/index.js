@@ -51,7 +51,8 @@ export default function CardOptions({ deleteOption, editOption }) {
         {options.map((option) => (
           <MenuItem
             key={option.title}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               option.onClick();
               handleClose();
             }}

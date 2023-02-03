@@ -22,18 +22,22 @@ export default function AskPage({ askData }) {
 
   const { id } = params;
 
+  const getAsk = () => {
+    QuestionService.searchQuestionById(id)
+      .then((response) => {
+        setAsk(response);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      });
+  };
+
   useEffect(() => {
     if (!askData) {
-      QuestionService.searchQuestionById(id)
-        .then((response) => {
-          setAsk(response);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          let message = "Não foi possível se comunicar com o servidor.";
-          enqueueSnackbar(message, { variant: "error" });
-        });
+      getAsk();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -68,10 +72,11 @@ export default function AskPage({ askData }) {
                 accepted={answer.solution}
                 key={idx}
                 resumed={false}
+                getAsk={getAsk}
               />
             ))}
           </Box>
-          <CreateAnswerInput questionId={ask.id} />
+          <CreateAnswerInput questionId={ask.id} getAsk={getAsk} />
         </Box>
       )}
     </BasePage>
