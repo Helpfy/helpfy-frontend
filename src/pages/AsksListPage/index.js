@@ -6,12 +6,13 @@ import { SearchService } from "../../services/search";
 
 import { useSnackbar } from "notistack";
 
-import { Box, CircularProgress, Pagination } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 import { Link, useLocation } from "react-router-dom";
 
 import AskCard from "../../components/AskCard";
 import FiltersBar from "../../components/FiltersBar";
+import BasicPagination from "../../components/Pagination";
 
 export default function AsksListPage() {
   const { state } = useLocation();
@@ -69,7 +70,7 @@ export default function AsksListPage() {
             </Link>
           ))
         )}
-        <Pagination
+        <BasicPagination
           count={totalPages}
           page={currentPage}
           color="primary"
