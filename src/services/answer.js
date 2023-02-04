@@ -43,4 +43,24 @@ export const AnswerService = {
 
     return response.data;
   },
+
+  async delete(answersId, token) {
+    const response = await api.delete(`/answers/${answersId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  },
+
+  async update(answersId, body, token) {
+    const response = await api.patch(`/answers/${answersId}`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  },
 };

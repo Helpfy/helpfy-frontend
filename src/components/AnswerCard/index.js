@@ -1,25 +1,23 @@
-import React, { useContext } from "react";
-
+import React, { useContext, useState } from "react";
 import { Box, Divider } from "@mui/material";
-
 import CardHeader from "../../components/CardHeader";
 import CardContent from "../../components/CardContent";
 import CardInteract from "../../components/CardInteract";
 import CommentList from "../../components/CommentList";
-
 import { CommentService } from "../../services/comment";
 import { AuthContext } from "../../context/AuthContext";
 import { AnswerService } from "../../services/answer";
-
 import { useSnackbar } from "notistack";
 
 export default function AnswerCard({
   answer,
   resumed = true,
   accepted = false,
+  getAsk,
 }) {
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleUp = async () => {
     if (user && user.id) {
@@ -55,8 +53,35 @@ export default function AnswerCard({
         let message = "Não foi possível se comunicar com o servidor.";
         enqueueSnackbar(message, { variant: "error" });
       }
-      window.location.reload(false);
+      getAsk();
     }
+  };
+
+  const deleteAnswer = async () => {
+    if (user && user.id) {
+      const response = await AnswerService.delete(answer.id, token);
+      if (response.statusCode >= 400) {
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      }
+      enqueueSnackbar("Resposta deletada com sucesso.", { variant: "success" });
+      getAsk();
+    }
+  };
+
+  const editAnswerSubmit = async (event, questionText) => {
+    event.preventDefault();
+    setIsEditing(false);
+    const body = {
+      body: questionText,
+    };
+    const response = await AnswerService.update(answer.id, body, token);
+    let message = "Resposta editada com sucesso.";
+    if (response.statusCode >= 400) {
+      message = "Não foi possível se comunicar com o servidor.";
+      enqueueSnackbar(message, { variant: "error" });
+    }
+    enqueueSnackbar(message, { variant: "success" });
   };
 
   return (
@@ -91,17 +116,31 @@ export default function AnswerCard({
           userpicture={answer.author.avatarLink}
           time={answer.createdAt}
           resumed={resumed}
+          author={answer.author}
+          deleteOption={deleteAnswer}
+          editOption={() => {
+            setIsEditing(true);
+          }}
         />
-        <CardContent tldr={answer.body} />
-        <CardInteract
-          numUpVotes={answer.numberLikes}
-          numDownVotes={answer.numberDislikes}
-          likesSet={answer.likes}
-          dislikesSet={answer.dislikes}
-          handleUp={handleUp}
-          handleDown={handleDown}
-          addComment={handleComment}
+        <CardContent
+          tldr={answer.body}
+          editContent={editAnswerSubmit}
+          isEditing={isEditing}
+          cancelEdit={() => {
+            setIsEditing(false);
+          }}
         />
+        {!isEditing && (
+          <CardInteract
+            numUpVotes={answer.numberLikes}
+            numDownVotes={answer.numberDislikes}
+            likesSet={answer.likes}
+            dislikesSet={answer.dislikes}
+            handleUp={handleUp}
+            handleDown={handleDown}
+            addComment={handleComment}
+          />
+        )}
       </Box>
       {answer.comments.length > 0 && <Divider color="#f0f0f0" />}
       <CommentList comments={answer.comments} />
