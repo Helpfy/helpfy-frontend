@@ -79,7 +79,11 @@ export default function LeftMenu({
           justifyContent: "center",
         }}
       >
-        <Search openMenu={handleDrawerOpen} open={open} />
+        <Search
+          openMenu={handleDrawerOpen}
+          closeMenu={handleDrawerClose}
+          open={open}
+        />
       </Box>
       <Divider sx={{ borderColor: "#f0f0f0" }} />
       <List>
