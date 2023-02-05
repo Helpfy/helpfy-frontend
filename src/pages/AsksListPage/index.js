@@ -40,10 +40,10 @@ export default function AsksListPage() {
   useEffect(() => {
     if (state) {
       const { asks: asksData } = state;
-      if (asksData && asksData.length > 0) {
-        setAsks(asksData);
-        setIsLoading(false);
-      }
+      setCurrentPage(asksData.currentPage + 1);
+      setTotalPages(asksData.totalPages);
+      setAsks(asksData.data);
+      setIsLoading(false);
     } else {
       searchRequest(currentPage);
     }
@@ -70,15 +70,17 @@ export default function AsksListPage() {
             </Link>
           ))
         )}
-        <BasicPagination
-          count={totalPages}
-          page={currentPage}
-          color="primary"
-          onChange={(_, value) => {
-            document.getElementById("filter-buttons").scrollIntoView();
-            searchRequest(value);
-          }}
-        />
+        {asks.length > 0 && (
+          <BasicPagination
+            count={totalPages}
+            page={currentPage}
+            color="primary"
+            onChange={(_, value) => {
+              document.getElementById("filter-buttons").scrollIntoView();
+              searchRequest(value);
+            }}
+          />
+        )}
       </Box>
     </BasePage>
   );

@@ -13,13 +13,14 @@ import {
 
 import { SearchService } from "../../services/search";
 
-export default function Search({ open, openMenu }) {
+export default function Search({ open, openMenu, closeMenu }) {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (searchQuery.length > 0) {
       const asks = await SearchService.searchByTitle(searchQuery);
+      closeMenu();
       navigate("/ask", { state: { asks: asks } });
     }
   };
@@ -47,6 +48,11 @@ export default function Search({ open, openMenu }) {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           size="small"
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </FormControl>
     </ListItem>
