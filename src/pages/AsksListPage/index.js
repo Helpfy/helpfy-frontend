@@ -22,8 +22,10 @@ export default function AsksListPage() {
   useEffect(() => {
     if (state) {
       const { asks: asksData } = state;
-      if (asksData && asksData.length > 0) {
-        setAsks(asksData);
+      if (asksData && asksData.data?.length > 0) {
+        setCurrentPage(asksData.currentPage + 1);
+        setTotalPages(asksData.totalPages);
+        setAsks(asksData.data);
         setIsLoading(false);
       }
     } else {
