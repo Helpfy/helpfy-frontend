@@ -71,7 +71,10 @@ export default function CardInteractions({
     setCommenting(!commenting);
   };
 
-  const handleComment = () => {
+  const handleComment = (e) => {
+    e.preventDefault();
+    setComment("");
+    handleCommenting();
     addComment(comment);
   };
 

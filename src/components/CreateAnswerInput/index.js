@@ -13,25 +13,27 @@ import { AnswerService } from "../../services/answer";
 
 import { useSnackbar } from "notistack";
 
-export default function CreateAnswerInput({ questionId }) {
+export default function CreateAnswerInput({ questionId, getAsk }) {
   const [questionText, setQuestionText] = useState("");
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const response = await AnswerService.sendAnswer(
       questionText,
       questionId,
       user.id,
       token
     );
-
     if (response.statusCode >= 400) {
       let message = "Não foi possível se comunicar com o servidor.";
       enqueueSnackbar(message, { variant: "error" });
+      return;
     }
-
-    window.location.reload(false);
+    enqueueSnackbar("Resposta criada com sucesso.", { variant: "success" });
+    setQuestionText("");
+    getAsk();
   };
 
   return user ? (

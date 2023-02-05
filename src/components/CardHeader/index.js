@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CardOptions from "../../components/CardOptions";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function CardHeader({
   username,
   userpicture,
   time,
   resumed = true,
+  author,
+  deleteOption,
+  editOption,
 }) {
+  const { user } = useContext(AuthContext);
+  const isValidOptions =
+    !resumed && user && JSON.stringify(user) === JSON.stringify(author);
   return (
     <Box
       sx={{
@@ -45,7 +52,9 @@ export default function CardHeader({
           </Typography>
         </Box>
       </Box>
-      {!resumed && <CardOptions />}
+      {isValidOptions && (
+        <CardOptions deleteOption={deleteOption} editOption={editOption} />
+      )}
     </Box>
   );
 }

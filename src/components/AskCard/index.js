@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Box, Divider } from "@mui/material";
 
@@ -11,10 +11,13 @@ import { CommentService } from "../../services/comment";
 import { QuestionService } from "../../services/question";
 import { AuthContext } from "../../context/AuthContext";
 import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 export default function AskCard({ ask, resumed = true, accepted = false }) {
   const { user, token } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleUp = async () => {
     if (user && user.id) {
@@ -54,6 +57,38 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
     }
   };
 
+  const goToHomePage = () => {
+    navigate("/");
+  };
+
+  const deleteAsk = async () => {
+    if (user && user.id) {
+      const response = await QuestionService.delete(ask.id, token);
+      if (response.statusCode >= 400) {
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      }
+      window.location.reload(false);
+      goToHomePage();
+    }
+  };
+
+  const editAskSubmit = async (event, questionText, title) => {
+    event.preventDefault();
+    setIsEditing(false);
+    const body = {
+      title: title,
+      body: questionText,
+    };
+    const response = await QuestionService.update(ask.id, body, token);
+    let message = "Pergunta editada com sucesso.";
+    if (response.statusCode >= 400) {
+      message = "Não foi possível se comunicar com o servidor.";
+      enqueueSnackbar(message, { variant: "error" });
+    }
+    enqueueSnackbar(message, { variant: "success" });
+  };
+
   return (
     <Box
       sx={{
@@ -74,19 +109,36 @@ export default function AskCard({ ask, resumed = true, accepted = false }) {
         userpicture={ask.author.avatarLink}
         time={ask.author.createdAt}
         resumed={resumed}
+        author={ask.author}
+        deleteOption={deleteAsk}
+        editOption={() => {
+          setIsEditing(true);
+        }}
       />
-      <CardContent title={ask.title} tldr={ask.body} />
-      <TagList tags={ask.tags} />
-      <CardInteract
-        numUpVotes={ask.numberLikes}
-        numDownVotes={ask.numberDislikes}
-        likesSet={ask.likes}
-        dislikesSet={ask.dislikes}
-        handleUp={handleUp}
-        handleDown={handleDown}
-        addComment={handleComment}
-        resumed={resumed}
+      <CardContent
+        titleProps={ask.title}
+        tldr={ask.body}
+        editContent={editAskSubmit}
+        isEditing={isEditing}
+        cancelEdit={() => {
+          setIsEditing(false);
+        }}
       />
+      {!isEditing && (
+        <>
+          <TagList tags={ask.tags} />
+          <CardInteract
+            numUpVotes={ask.numberLikes}
+            numDownVotes={ask.numberDislikes}
+            likesSet={ask.likes}
+            dislikesSet={ask.dislikes}
+            handleUp={handleUp}
+            handleDown={handleDown}
+            addComment={handleComment}
+            resumed={resumed}
+          />
+        </>
+      )}
       {!resumed && ask.comments.length > 0 && <Divider color="#f0f0f0" />}
       {!resumed && <CommentList comments={ask.comments} />}
     </Box>
