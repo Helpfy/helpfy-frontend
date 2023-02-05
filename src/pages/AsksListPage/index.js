@@ -75,6 +75,7 @@ export default function AsksListPage() {
           page={currentPage}
           color="primary"
           onChange={(_, value) => {
+            document.getElementById("filter-buttons").scrollIntoView();
             searchRequest(value);
           }}
         />

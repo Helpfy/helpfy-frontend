@@ -5,6 +5,7 @@ import Chip from "@mui/material/Chip";
 export default function FilterButton({ icon, label, background, fontColor }) {
   return (
     <Chip
+      id="filter-buttons"
       label={label}
       icon={icon}
       sx={{
