@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import Router from "./Router.js";
 import { ContextProvider } from "./context/AuthContext.js";
+import { SearchProvider } from "./context/SearchContext.js";
 
 const theme = createTheme({
   white: {
@@ -21,9 +22,11 @@ export default function App() {
           horizontal: "center",
         }}
       >
-        <ContextProvider>
-          <Router />
-        </ContextProvider>
+        <SearchProvider>
+          <ContextProvider>
+            <Router />
+          </ContextProvider>
+        </SearchProvider>
       </SnackbarProvider>
     </ThemeProvider>
   );
