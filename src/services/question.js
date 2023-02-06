@@ -79,4 +79,13 @@ export const QuestionService = {
     });
     return response.data;
   },
+
+  async accept(questionId, token) {
+    const response = await api.patch(`/questions/${questionId}/answered`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
 };

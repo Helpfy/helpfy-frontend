@@ -14,6 +14,7 @@ export default function CardHeader({
   author,
   deleteOption,
   editOption,
+  acceptAnswer
 }) {
   const { user } = useContext(AuthContext);
   const isValidOptions =
@@ -53,7 +54,11 @@ export default function CardHeader({
         </Box>
       </Box>
       {isValidOptions && (
-        <CardOptions deleteOption={deleteOption} editOption={editOption} />
+        <CardOptions
+          deleteOption={deleteOption}
+          editOption={editOption}
+          acceptAnswerOption={acceptAnswer}
+        />
       )}
     </Box>
   );
