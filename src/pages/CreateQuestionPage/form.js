@@ -88,9 +88,15 @@ export default function CreateQuestionForm() {
           handleAdd={handleTagAdd}
         />
         <FormControl>
-          <InputLabel htmlFor="title-component">Title</InputLabel>
+          <InputLabel
+            sx={{ color: "#F0F0F0" }}
+            htmlFor="title-component"
+            focused={false}
+          >
+            Title
+          </InputLabel>
           <OutlinedInput
-            sx={{ background: "#393E41" }}
+            sx={{ background: "#393E41", color: "#F0F0F0" }}
             id="title-component"
             value={title}
             onChange={(e) => setTitle(e.target.value)}

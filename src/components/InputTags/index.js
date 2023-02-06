@@ -44,9 +44,15 @@ export default function InputTags({ values, handleAdd, handleDelete }) {
         spacing={1}
       >
         <FormControl sx={{ width: "100%" }}>
-          <InputLabel htmlFor="tag-component">Tag</InputLabel>
+          <InputLabel
+            htmlFor="tag-component"
+            sx={{ color: "#F0F0F0" }}
+            focused={false}
+          >
+            Tag
+          </InputLabel>
           <OutlinedInput
-            sx={{ background: "#393E41" }}
+            sx={{ background: "#393E41", color: "#F0F0F0" }}
             id="tag-component"
             value={newTag}
             onChange={(e) => setNewtag(e.target.value)}
