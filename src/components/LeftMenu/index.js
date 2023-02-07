@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -34,7 +34,7 @@ export default function LeftMenu({
       requiredLogin: true,
     },
     Questões: {
-      icon: <QuestionMarkIcon style={{ color: "#f0f0f0" }} />,
+      icon: <FormatListBulletedIcon style={{ color: "#f0f0f0" }} />,
       path: "/ask",
     },
     Perfil: {
