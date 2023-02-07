@@ -63,4 +63,15 @@ export const AnswerService = {
 
     return response.data;
   },
+
+  async accept(answersId, token) {
+    const response = await api.patch(`/answers/${answersId}/solution`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  },
+
 };

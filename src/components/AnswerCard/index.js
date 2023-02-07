@@ -7,10 +7,12 @@ import CommentList from "../../components/CommentList";
 import { CommentService } from "../../services/comment";
 import { AuthContext } from "../../context/AuthContext";
 import { AnswerService } from "../../services/answer";
+import { QuestionService } from "../../services/question";
 import { useSnackbar } from "notistack";
 
 export default function AnswerCard({
   answer,
+  ask,
   resumed = true,
   accepted = false,
   getAsk,
@@ -69,6 +71,27 @@ export default function AnswerCard({
     }
   };
 
+  const acceptAnswer = async () => {
+    if (user && user.id) {
+      const responseAnswer = await AnswerService.accept(answer.id, token);
+  
+      let responseQuestion;
+      if (!ask.answered) {
+        responseQuestion = await QuestionService.accept(ask.id, token);
+      }
+
+      if (
+        responseAnswer.statusCode >= 400 || 
+        (responseQuestion && responseQuestion.statusCode >= 400)
+      ) {
+        let message = "Não foi possível se comunicar com o servidor.";
+        enqueueSnackbar(message, { variant: "error" });
+      }
+      enqueueSnackbar("Resposta aceita com sucesso.", { variant: "success" });
+      getAsk();
+    }
+  };
+
   const editAnswerSubmit = async (event, questionText) => {
     event.preventDefault();
     setIsEditing(false);
@@ -121,6 +144,7 @@ export default function AnswerCard({
           editOption={() => {
             setIsEditing(true);
           }}
+          acceptAnswer={acceptAnswer}
         />
         <CardContent
           tldr={answer.body}

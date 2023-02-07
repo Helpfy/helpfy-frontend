@@ -68,6 +68,7 @@ export default function AskPage({ askData }) {
           >
             {ask.answers.map((answer, idx) => (
               <AnswerCard
+                ask={ask}
                 answer={answer}
                 accepted={answer.solution}
                 key={idx}

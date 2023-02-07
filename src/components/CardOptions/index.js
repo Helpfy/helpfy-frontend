@@ -6,7 +6,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ITEM_HEIGHT = 30;
 
-export default function CardOptions({ deleteOption, editOption }) {
+export default function CardOptions({ deleteOption, editOption, acceptAnswerOption }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const options = [
     { title: "Excluir", onClick: deleteOption },
@@ -43,7 +43,7 @@ export default function CardOptions({ deleteOption, editOption }) {
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
+            maxHeight: ITEM_HEIGHT * 6.75,
             width: "20ch",
           },
         }}
@@ -60,6 +60,18 @@ export default function CardOptions({ deleteOption, editOption }) {
             {option.title}
           </MenuItem>
         ))}
+        {acceptAnswerOption && (
+          <MenuItem
+            key={"Aceitar"}
+            onClick={(e) => {
+              e.preventDefault();
+              acceptAnswerOption();
+              handleClose();
+            }}
+          >
+            {"Aceitar"}
+          </MenuItem>
+        )}
       </Menu>
     </div>
   );

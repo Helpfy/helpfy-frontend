@@ -52,7 +52,7 @@ export default function CardContent({
           />
         </FormControl>
       )}
-      <Box sx={!isEditing ?? { "& *": { color: "#F0F0F0" } }}>
+      <Box sx={!isEditing && { "& *": { color: "#F0F0F0" } }}>
         {!isEditing ? (
           <ReactMarkdown children={questionText} />
         ) : (
