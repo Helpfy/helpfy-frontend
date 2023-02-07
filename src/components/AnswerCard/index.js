@@ -74,14 +74,14 @@ export default function AnswerCard({
   const acceptAnswer = async () => {
     if (user && user.id) {
       const responseAnswer = await AnswerService.accept(answer.id, token);
-  
+
       let responseQuestion;
       if (!ask.answered) {
         responseQuestion = await QuestionService.accept(ask.id, token);
       }
 
       if (
-        responseAnswer.statusCode >= 400 || 
+        responseAnswer.statusCode >= 400 ||
         (responseQuestion && responseQuestion.statusCode >= 400)
       ) {
         let message = "Não foi possível se comunicar com o servidor.";
@@ -135,6 +135,7 @@ export default function AnswerCard({
         className={accepted ? "accepted" : "normal"}
       >
         <CardHeader
+          askAuthor={ask.author}
           username={answer.author.name}
           userpicture={answer.author.avatarLink}
           time={answer.createdAt}

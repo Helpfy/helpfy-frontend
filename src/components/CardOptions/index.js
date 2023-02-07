@@ -6,11 +6,16 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ITEM_HEIGHT = 30;
 
-export default function CardOptions({ deleteOption, editOption, acceptAnswerOption }) {
+export default function CardOptions({
+  deleteOption,
+  editOption,
+  acceptAnswerOption,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const options = [
     { title: "Excluir", onClick: deleteOption },
     { title: "Editar", onClick: editOption },
+    { title: "Aceitar", onClick: acceptAnswerOption },
   ];
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -48,29 +53,20 @@ export default function CardOptions({ deleteOption, editOption, acceptAnswerOpti
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem
-            key={option.title}
-            onClick={(e) => {
-              e.preventDefault();
-              option.onClick();
-              handleClose();
-            }}
-          >
-            {option.title}
-          </MenuItem>
-        ))}
-        {acceptAnswerOption && (
-          <MenuItem
-            key={"Aceitar"}
-            onClick={(e) => {
-              e.preventDefault();
-              acceptAnswerOption();
-              handleClose();
-            }}
-          >
-            {"Aceitar"}
-          </MenuItem>
+        {options.map(
+          (option) =>
+            option.onClick && (
+              <MenuItem
+                key={option.title}
+                onClick={(e) => {
+                  e.preventDefault();
+                  option.onClick();
+                  handleClose();
+                }}
+              >
+                {option.title}
+              </MenuItem>
+            )
         )}
       </Menu>
     </div>

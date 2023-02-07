@@ -14,11 +14,14 @@ export default function CardHeader({
   author,
   deleteOption,
   editOption,
-  acceptAnswer
+  acceptAnswer,
+  askAuthor,
 }) {
   const { user } = useContext(AuthContext);
-  const isValidOptions =
+  const canEditDelete =
     !resumed && user && JSON.stringify(user) === JSON.stringify(author);
+  const canAccept = JSON.stringify(user) === JSON.stringify(askAuthor);
+  const isValidOptions = canEditDelete || canAccept;
   return (
     <Box
       sx={{
@@ -55,9 +58,9 @@ export default function CardHeader({
       </Box>
       {isValidOptions && (
         <CardOptions
-          deleteOption={deleteOption}
-          editOption={editOption}
-          acceptAnswerOption={acceptAnswer}
+          deleteOption={canEditDelete && deleteOption}
+          editOption={canEditDelete && editOption}
+          acceptAnswerOption={canAccept && acceptAnswer}
         />
       )}
     </Box>
