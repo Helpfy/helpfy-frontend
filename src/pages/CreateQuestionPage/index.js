@@ -5,7 +5,7 @@ import CreateQuestionForm from "./form";
 
 export default function CreateQuestionPage() {
   return (
-    <BasePage pageName="Create Question">
+    <BasePage pageName="Criar Questão">
       <CreateQuestionForm />
     </BasePage>
   );
