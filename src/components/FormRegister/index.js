@@ -35,6 +35,12 @@ export default function FormRegister() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (values.confirmPassword !== values.password) {
+      enqueueSnackbar("A confirmação da senha precisa ser igual a senha.", {
+        variant: "error",
+      });
+      return;
+    }
     const body = {
       avatarLink: "",
       email: values.email,
