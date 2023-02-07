@@ -78,6 +78,13 @@ export default function ProfilePage() {
   const handleUploadClick = (e) => {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
+    if (e.target.files[0].size > 1048576) {
+      enqueueSnackbar(
+        "Desculpe, mas o arquivo que você está tentando enviar excede o tamanho máximo permitido de 1 MB. Por favor, selecione um arquivo menor e tente novamente. Obrigado!",
+        { variant: "error", autoHideDuration: 8000 }
+      );
+      return;
+    }
     setLoadingImg(true);
     UserService.uploadImage(formData, token)
       .then((response) => {
@@ -86,6 +93,9 @@ export default function ProfilePage() {
         }`;
         let userWithUrl = { ...values, avatarLink: url };
         setValues(userWithUrl);
+        enqueueSnackbar("Salve as alterações para salvar a imagem enviada.", {
+          variant: "success",
+        });
         setLoadingImg(false);
       })
       .catch((err) => {
