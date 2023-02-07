@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import SearchIcon from "@mui/icons-material/Search";
+import { SearchContext } from "../../context/SearchContext";
 
 import {
   FormControl,
@@ -15,13 +16,16 @@ import { SearchService } from "../../services/search";
 
 export default function Search({ open, openMenu, closeMenu }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const { setAsks, setIsLoading } = useContext(SearchContext);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (searchQuery.length > 0) {
+      setIsLoading(true);
       const asks = await SearchService.searchByTitle(searchQuery);
       closeMenu();
-      navigate("/ask", { state: { asks: asks } });
+      setAsks(asks);
+      navigate("/ask");
     }
   };
 

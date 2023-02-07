@@ -14,12 +14,8 @@ import { SearchService } from "../../services/search";
 import { SearchContext } from "../../context/SearchContext";
 
 export default function FiltersBar() {
-  const {
-    filter,
-    setFilter,
-    setAsks,
-    setIsLoading
-  } = useContext(SearchContext);
+  const { filter, setFilter, setAsks, setIsLoading } =
+    useContext(SearchContext);
 
   const changeFilter = async (filter) => {
     setFilter(filter);
@@ -27,17 +23,17 @@ export default function FiltersBar() {
 
     const asks = await SearchService.searchByFilter(filter);
 
-    setAsks(asks.data);
+    setAsks(asks);
     setIsLoading(false);
   };
 
   const getColorByFilter = (selFilter) => {
     return filter === selFilter ? "#F0F0F0" : "#181818";
-  }
+  };
 
   const getBackgroundByFilter = (selFilter) => {
     return filter === selFilter ? "#1976D2" : "#F0F0F0";
-  }
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -50,50 +46,47 @@ export default function FiltersBar() {
         <FilterButton
           label="Novas"
           icon={
-            <AccessTimeIcon 
-              color={getColorByFilter('new')}
-              fontSize="small" 
-            />
+            <AccessTimeIcon color={getColorByFilter("new")} fontSize="small" />
           }
-          onClick={() => changeFilter('new')}
-          background={getBackgroundByFilter('new')}
-          fontColor={getColorByFilter('new')}
+          onClick={() => changeFilter("new")}
+          background={getBackgroundByFilter("new")}
+          fontColor={getColorByFilter("new")}
         />
         <FilterButton
           label="Mais Votadas"
           icon={
             <StarOutlineIcon
-              color={getColorByFilter('vote')}
+              color={getColorByFilter("vote")}
               fontSize="small"
             />
           }
-          onClick={() => changeFilter('vote')}
-          background={getBackgroundByFilter('vote')}
-          fontColor={getColorByFilter('vote')}
+          onClick={() => changeFilter("vote")}
+          background={getBackgroundByFilter("vote")}
+          fontColor={getColorByFilter("vote")}
         />
         <FilterButton
           label="Relevantes"
           icon={
             <WhatshotIcon
-              color={getColorByFilter('relevant')}
-              fontSize="small" 
+              color={getColorByFilter("relevant")}
+              fontSize="small"
             />
           }
-          onClick={() => changeFilter('relevant')}
-          background={getBackgroundByFilter('relevant')}
-          fontColor={getColorByFilter('relevant')}
+          onClick={() => changeFilter("relevant")}
+          background={getBackgroundByFilter("relevant")}
+          fontColor={getColorByFilter("relevant")}
         />
         <FilterButton
           label="Concluídas"
           icon={
             <CheckCircleOutlineIcon
-              color={getColorByFilter('answered')}
-              fontSize="small" 
+              color={getColorByFilter("answered")}
+              fontSize="small"
             />
           }
-          onClick={() => changeFilter('answered')}
-          background={getBackgroundByFilter('answered')}
-          fontColor={getColorByFilter('answered')}
+          onClick={() => changeFilter("answered")}
+          background={getBackgroundByFilter("answered")}
+          fontColor={getColorByFilter("answered")}
         />
       </Stack>
     </Box>

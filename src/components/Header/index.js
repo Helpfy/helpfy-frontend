@@ -9,6 +9,9 @@ import { AuthContext } from "../../context/AuthContext";
 import imageDefault from "../../assets/perfil_not_found.png";
 import imageNotFound from "../../assets/link_not_valid.jpg";
 import { Avatar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import { SearchService } from "../../services/search";
+import { SearchContext } from "../../context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({
   open,
@@ -18,6 +21,17 @@ export default function Header({
   logout,
 }) {
   const { user, logoutUser } = useContext(AuthContext);
+  const { setAsks, setIsLoading } = useContext(SearchContext);
+
+  const navigate = useNavigate();
+
+  const search = async () => {
+    setIsLoading(true);
+    const asks = await SearchService.searchByFilter("new");
+    setAsks(asks);
+    setIsLoading(false);
+    navigate("/ask");
+  };
 
   return (
     <header>
@@ -37,8 +51,13 @@ export default function Header({
               <MenuIcon />
             </IconButton>
           )}
-          <Link to={"/"}>
-            <IconButton color="inherit" edge="start" size="large">
+          <Link>
+            <IconButton
+              color="inherit"
+              edge="start"
+              size="large"
+              onClick={search}
+            >
               <HelpfyLogo />
             </IconButton>
           </Link>

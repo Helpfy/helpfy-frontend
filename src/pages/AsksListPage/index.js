@@ -8,7 +8,7 @@ import { useSnackbar } from "notistack";
 
 import { Box, CircularProgress } from "@mui/material";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { SearchContext } from "../../context/SearchContext";
 
@@ -17,23 +17,17 @@ import FiltersBar from "../../components/FiltersBar";
 import BasicPagination from "../../components/Pagination";
 
 export default function AsksListPage() {
-  const { state } = useLocation();
   const { enqueueSnackbar } = useSnackbar();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const {
-    filter,
-    setAsks,
-    asks,
-    isLoading,
-    setIsLoading
-  } = useContext(SearchContext);
+  const { filter, setAsks, asks, isLoading, setIsLoading } =
+    useContext(SearchContext);
 
   const searchRequest = (page) => {
     setIsLoading(true);
     SearchService.searchByFilter(filter, page - 1)
       .then((response) => {
-        setAsks(response.data);
+        setAsks(response);
         setCurrentPage(page);
         setTotalPages(response.totalPages);
         setIsLoading(false);
@@ -46,17 +40,17 @@ export default function AsksListPage() {
   };
 
   useEffect(() => {
-    if (state) {
-      const { asks: asksData } = state;
-      setCurrentPage(asksData.currentPage + 1);
-      setTotalPages(asksData.totalPages);
-      setAsks(asksData.data);
-      setIsLoading(false);
-    } else {
-      searchRequest(currentPage);
-    }
+    setCurrentPage(asks.currentPage + 1);
+    setTotalPages(asks.totalPages);
+    setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state]);
+  }, [asks]);
+
+  useEffect(() => {
+    if (!asks) {
+      searchRequest(1);
+    }
+  }, []);
 
   return (
     <BasePage pageName="Questões">
@@ -75,19 +69,19 @@ export default function AsksListPage() {
               width: "100%",
               display: "flex",
               justifyContent: "center",
-              padding: "2em 0"
+              padding: "2em 0",
             }}
           >
             <CircularProgress />
           </Box>
         ) : (
-          asks.map((item, i) => (
+          asks.data?.map((item, i) => (
             <Link to={`/ask/${item.id}`} key={i}>
               <AskCard ask={item} />
             </Link>
           ))
         )}
-        {asks.length > 0 && (
+        {asks.data?.length > 0 && (
           <BasicPagination
             count={totalPages}
             page={currentPage}
