@@ -47,7 +47,7 @@ export default function AsksListPage() {
   }, [asks]);
 
   useEffect(() => {
-    if (!asks) {
+    if (!Object.keys(asks).length) {
       searchRequest(1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
