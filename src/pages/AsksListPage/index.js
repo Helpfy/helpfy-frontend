@@ -82,7 +82,7 @@ export default function AsksListPage() {
             </Link>
           ))
         )}
-        {asks.data?.length > 0 && (
+        {asks.data?.length > 0 && !isLoading && (
           <BasicPagination
             count={totalPages}
             page={currentPage}
