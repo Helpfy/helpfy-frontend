@@ -5,7 +5,20 @@ export const UserService = {
   },
 
   login(body) {
-    return api.post(`/login`, body);
+    return api.get(`/auth`);
+  },
+
+  async loginSucess() {
+    const resp = await api.get(`/login-success`);
+    console.log(resp);
+    return resp;
+  },
+
+  async loginFail() {
+    debugger;
+    const resp = await api.get(`/login-fail`);
+    console.log(resp);
+    return resp;
   },
 
   update(user, token) {
