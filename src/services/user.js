@@ -4,8 +4,10 @@ export const UserService = {
     return api.post(`/users`, body);
   },
 
-  login(body) {
-    return api.get(`/auth`);
+  async login(credential) {
+    const resp = await api.get(`/login/oauth2?token=${credential}`);
+    console.log(resp)
+    return resp
   },
 
   async loginSucess() {

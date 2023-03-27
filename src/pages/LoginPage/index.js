@@ -56,6 +56,7 @@ export default function LoginPage() {
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse);
+                  UserService.login(credentialResponse.credential)
                 }}
                 onError={() => {
                   console.log("Login Failed");
