@@ -1,6 +1,7 @@
 const DadosEstaticosService = {
   getURLServidor() {
-    return "https://helpfy-backend.up.railway.app";
+    // return "https://helpfy-backend.up.railway.app";
+    return "http://localhost:8081"
   },
 };
 

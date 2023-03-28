@@ -13,6 +13,7 @@ import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { UserService } from "../../services/user";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage({ loading, setLoading }) {
   const { enqueueSnackbar } = useSnackbar();
@@ -79,73 +80,21 @@ export default function LoginPage({ loading, setLoading }) {
     event.preventDefault();
   };
 
+  const responseMessage = async (response) => {
+    console.log(response);
+    debugger
+    // const response2 = await UserService.login(response.credential)
+    UserService.teste(response.credential)
+  };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
+
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+    <Box sx={{ mt: 3 }}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <FormControl
-            fullWidth={true}
-            sx={{ background: "white", borderRadius: "5px" }}
-          >
-            <OutlinedInput
-              required
-              id="email"
-              type={"email"}
-              value={values.email}
-              onChange={handleChange("email")}
-              placeholder="Email"
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl
-            fullWidth={true}
-            sx={{ background: "white", borderRadius: "5px" }}
-          >
-            <OutlinedInput
-              required
-              id="password"
-              type={values.showPassword ? "text" : "password"}
-              value={values.password}
-              onChange={handleChange("password")}
-              placeholder="Senha"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </Grid>
-      </Grid>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{
-          mt: 3,
-          mb: 2,
-          color: "#F0F0F0",
-          "&:hover": {
-            background: "#217CCB",
-            filter: "brightness(85%)",
-          },
-        }}
-      >
-        Entrar
-      </Button>
-      <Grid container justifyContent="flex-end">
-        <Grid item>
-          <Link to="/register" style={linkStyle}>
-            Não tem uma conta? Registre-se
-          </Link>
+        <Grid item xs={12} alignContent="center">
+          <GoogleLogin onSuccess={responseMessage} onError={errorMessage} useOneTap/>
         </Grid>
       </Grid>
     </Box>

@@ -38,7 +38,7 @@ export default function LoginPage() {
                 color={"#f0f0f0"}
                 fontWeight={"bold"}
               >
-                Sentimos sua falta!
+                Entre na comunidade Helpfy
               </Typography>
               <Typography
                 component="p"
@@ -46,7 +46,8 @@ export default function LoginPage() {
                 color={"#f0f0f0"}
                 textAlign="center"
               >
-                Vamos em busca do conhecimento coletivo.
+                Obtenha mais recursos e privilégios ingressando na comunidade de
+                estudantes!
               </Typography>
               <FormLogin setLoading={setLoading} loading={loading} />
             </Box>
