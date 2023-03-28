@@ -4,6 +4,7 @@ import { SnackbarProvider } from "notistack";
 import Router from "./Router.js";
 import { ContextProvider } from "./context/AuthContext.js";
 import { SearchProvider } from "./context/SearchContext.js";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const theme = createTheme({
   white: {
@@ -24,7 +25,9 @@ export default function App() {
       >
         <SearchProvider>
           <ContextProvider>
-            <Router />
+            <GoogleOAuthProvider clientId="765141960652-1056kh7b79p9omu0f87iocrhgn9vf0t7.apps.googleusercontent.com">
+              <Router />
+            </GoogleOAuthProvider>
           </ContextProvider>
         </SearchProvider>
       </SnackbarProvider>

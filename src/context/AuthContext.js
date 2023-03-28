@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { googleLogout } from "@react-oauth/google";
 
 export const AuthContext = React.createContext(null);
 
@@ -21,6 +22,7 @@ export const ContextProvider = (props) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setStateAuth({ user: undefined, token: undefined });
+    googleLogout();
   };
 
   const login = (response) => {

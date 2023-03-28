@@ -74,16 +74,10 @@ export default function Header({
               sx={{ display: "flex", gap: "0.5em" }}
             >
               <ButtonBG
-                href="/register"
-                text="Registrar"
-                color="#F0F0F0"
-                background="#217CCB"
-              />
-              <ButtonBG
                 href="/login"
                 text="Entrar"
-                color="#181818"
-                background="#F0F0F0"
+                color="#F0F0F0"
+                background="#217CCB"
               />
             </Box>
           ) : (
@@ -97,8 +91,8 @@ export default function Header({
                   <Avatar
                     sx={{
                       bgcolor: "#f0f0f0",
-                      width: "2rem",
-                      height: "2rem",
+                      width: "3rem",
+                      height: "3rem",
                     }}
                     src={user.avatarLink || imageDefault}
                     alt={`Profile image of ...`}
