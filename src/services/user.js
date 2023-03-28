@@ -4,8 +4,23 @@ export const UserService = {
     return api.post(`/users`, body);
   },
 
-  login(body) {
-    return api.post(`/login`, body);
+  async login(credential) {
+    const resp = await api.get(`/login/oauth2?token=${credential}`);
+    console.log(resp)
+    return resp
+  },
+
+  async loginSucess() {
+    const resp = await api.get(`/login-success`);
+    console.log(resp);
+    return resp;
+  },
+
+  async loginFail() {
+    debugger;
+    const resp = await api.get(`/login-fail`);
+    console.log(resp);
+    return resp;
   },
 
   update(user, token) {

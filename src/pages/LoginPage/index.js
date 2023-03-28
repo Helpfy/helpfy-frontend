@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import BasePage from "../BasePage";
 import FormLogin from "../../components/FormLogin";
+import { UserService } from "../../services/user";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -49,6 +51,15 @@ export default function LoginPage() {
                 Vamos em busca do conhecimento coletivo.
               </Typography>
               <FormLogin setLoading={setLoading} loading={loading} />
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                  UserService.login(credentialResponse.credential);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
             </Box>
           </Container>
         )}
