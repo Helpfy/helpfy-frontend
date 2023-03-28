@@ -2,9 +2,7 @@ import { React, useState } from "react";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import BasePage from "../BasePage";
 import FormLogin from "../../components/FormLogin";
-// import GoogleButton from "react-google-button";
 import { UserService } from "../../services/user";
-// import { GoogleLogin } from "react-google-login";
 import { GoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage() {
@@ -56,7 +54,7 @@ export default function LoginPage() {
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse);
-                  UserService.login(credentialResponse.credential)
+                  UserService.login(credentialResponse.credential);
                 }}
                 onError={() => {
                   console.log("Login Failed");
