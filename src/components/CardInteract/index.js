@@ -107,7 +107,7 @@ export default function CardInteractions({
             icon={<ArrowUpwardIcon color="white" fontSize="small" />}
             background={"#49BE25"}
             fontColor={"#181818"}
-            onClick={!resumed ? handleUpvote : undefined}
+            onClick={!resumed && user ? handleUpvote : undefined}
             isActive={typeButtonPressed === "up"}
           />
           <Button
@@ -115,7 +115,7 @@ export default function CardInteractions({
             icon={<ArrowDownwardIcon color="white" fontSize="small" />}
             background={"#E80000"}
             fontColor={"#181818"}
-            onClick={!resumed ? handleDownvote : undefined}
+            onClick={!resumed && user ? handleDownvote : undefined}
             isActive={typeButtonPressed === "down"}
           />
         </Box>

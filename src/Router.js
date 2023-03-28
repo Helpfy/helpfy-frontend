@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import {
   ASKS,
-  REGISTER,
   RULES,
   SIGN_IN,
   ASK,
@@ -14,13 +13,11 @@ import {
 import RulesPage from "./pages/RulesPage";
 import AsksListPage from "./pages/AsksListPage";
 import AskPage from "./pages/AskPage";
-import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import CreateQuestionPage from "./pages/CreateQuestionPage";
 import { AuthContext } from "./context/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function Router() {
   const { user } = useContext(AuthContext);
@@ -43,7 +40,6 @@ export default function Router() {
         <Route exact path={RULES.route} element={<RulesPage />} />
         {!user && (
           <>
-            <Route exact path={REGISTER.route} element={<RegisterPage />} />
             <Route exact path={SIGN_IN.route} element={<LoginPage />} />
           </>
         )}
@@ -53,13 +49,11 @@ export default function Router() {
   };
 
   return (
-    <GoogleOAuthProvider clientId="765141960652-1056kh7b79p9omu0f87iocrhgn9vf0t7.apps.googleusercontent.com">
-      <BrowserRouter>
-        <Routes>
-          {user && signRoutes()}
-          {otherRoutes()}
-        </Routes>
-      </BrowserRouter>
-    </GoogleOAuthProvider>
+    <BrowserRouter>
+      <Routes>
+        {user && signRoutes()}
+        {otherRoutes()}
+      </Routes>
+    </BrowserRouter>
   );
 }

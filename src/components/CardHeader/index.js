@@ -20,8 +20,9 @@ export default function CardHeader({
   const { user } = useContext(AuthContext);
   const canEditDelete =
     !resumed && user && JSON.stringify(user) === JSON.stringify(author);
-  const canAccept = JSON.stringify(user) === JSON.stringify(askAuthor);
+  const canAccept = user && JSON.stringify(user) === JSON.stringify(askAuthor);
   const isValidOptions = canEditDelete || canAccept;
+
   return (
     <Box
       sx={{
